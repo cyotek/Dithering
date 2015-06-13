@@ -6,7 +6,7 @@
  * Licensed under the MIT License. See LICENSE.txt for the full text.
  */
 
-namespace Cyotek.DitheringTest.Helpers
+namespace Cyotek
 {
   internal static class IntegerExtensions
   {

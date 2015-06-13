@@ -8,7 +8,7 @@
  * Licensed under the MIT License. See LICENSE.txt for the full text.
  */
 
-namespace Cyotek.DitheringTest
+namespace Cyotek.Drawing
 {
   /// <summary>
   /// Represents an ARGB (alpha, red, green, blue) color.

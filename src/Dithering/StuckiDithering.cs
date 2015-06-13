@@ -7,20 +7,21 @@
  */
 
 /*
- * Burkes Dithering
+ * Stucki Dithering
  * http://www.efg2.com/Lab/Library/ImageProcessing/DHALF.TXT
  *
- *                  *  8/32 4/32
- *      2/32 4/32 8/32 4/32 2/32
+ *                  *  8/42 4/42
+ *      2/42 4/42 8/42 4/42 2/42
+ *      1/42 2/42 4/42 2/42 1/42
  */
 
 namespace Cyotek.Drawing.Imaging.ColorReduction
 {
-  public sealed class BurksDithering : ErrorDiffusionDithering
+  public sealed class StuckiDithering : ErrorDiffusionDithering
   {
     #region Constructors
 
-    public BurksDithering()
+    public StuckiDithering()
       : base(new byte[,]
              {
                {
@@ -28,8 +29,11 @@ namespace Cyotek.Drawing.Imaging.ColorReduction
                },
                {
                  2, 4, 8, 4, 2
+               },
+               {
+                 1, 2, 4, 2, 1
                }
-             }, 5, true)
+             }, 42, false)
     { }
 
     #endregion

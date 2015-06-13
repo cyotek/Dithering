@@ -4,8 +4,9 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Media;
 using System.Windows.Forms;
-using Cyotek.DitheringTest.Dithering;
 using Cyotek.DitheringTest.Helpers;
+using Cyotek.Drawing;
+using Cyotek.Drawing.Imaging.ColorReduction;
 using Cyotek.Windows.Forms;
 
 /* Dithering an image using the Floyd–Steinberg algorithm in C#
@@ -69,7 +70,7 @@ namespace Cyotek.DitheringTest
       this.OpenImage(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"resources\sample.png"));
 
       //this.OpenImage(ArticleDiagrams.CreateBurkesDiagram());
-       //ArticleDiagrams.CreateBurkesDiagram().Save(@"C:\Checkout\cyotek\source\Applications\cyotek.com\files\articleimages\dithering-burkes-diagram.png", ImageFormat.Png);
+      //ArticleDiagrams.CreateBurkesDiagram().Save(@"C:\Checkout\cyotek\source\Applications\cyotek.com\files\articleimages\dithering-burkes-diagram.png", ImageFormat.Png);
     }
 
     private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -178,6 +179,34 @@ namespace Cyotek.DitheringTest
       else if (burkesRadioButton.Checked)
       {
         result = new BurksDithering();
+      }
+      else if (jarvisJudiceNinkeDitheringradioButton.Checked)
+      {
+        result = new JarvisJudiceNinkeDithering();
+      }
+      else if (stuckiRadioButton.Checked)
+      {
+        result = new StuckiDithering();
+      }
+      else if (sierra3RadioButton.Checked)
+      {
+        result = new Sierra3Dithering();
+      }
+      else if (sierra2RadioButton.Checked)
+      {
+        result = new Sierra2Dithering();
+      }
+      else if (sierraLiteRadioButton.Checked)
+      {
+        result = new SierraLiteDithering();
+      }
+      else if (atkinsonRadioButton.Checked)
+      {
+        result = new AtkinsonDithering();
+      }
+      else if (randomRadioButton.Checked)
+      {
+        result = new RandomDithering();
       }
       else
       {
@@ -327,6 +356,11 @@ namespace Cyotek.DitheringTest
       }
     }
 
+    private void thresholdNumericUpDown_ValueChanged(object sender, EventArgs e)
+    {
+      this.CreateTransformedImage();
+    }
+
     private ArgbColor TransformPixel(ArgbColor pixel)
     {
       byte gray;
@@ -343,10 +377,5 @@ namespace Cyotek.DitheringTest
     }
 
     #endregion
-
-    private void thresholdNumericUpDown_ValueChanged(object sender, EventArgs e)
-    {
-      this.CreateTransformedImage();
-    }
   }
 }

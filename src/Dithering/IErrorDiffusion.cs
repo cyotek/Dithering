@@ -6,13 +6,13 @@
  * Licensed under the MIT License. See LICENSE.txt for the full text.
  */
 
-namespace Cyotek.DitheringTest.Dithering
+namespace Cyotek.Drawing.Imaging.ColorReduction
 {
   public interface IErrorDiffusion
   {
     #region Methods
 
-    void Diffuse(ArgbColor[] original, ArgbColor originalPixel, ArgbColor transformedPixel, int x, int y, int width, int height);
+    void Diffuse(ArgbColor[] data, ArgbColor original, ArgbColor transformed, int x, int y, int width, int height);
 
     #endregion
   }

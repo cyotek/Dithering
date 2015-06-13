@@ -25,6 +25,14 @@
       this.thresholdNumericUpDown = new System.Windows.Forms.NumericUpDown();
       this.label1 = new System.Windows.Forms.Label();
       this.ditheringModeGroupBox = new System.Windows.Forms.GroupBox();
+      this.randomRadioButton = new System.Windows.Forms.RadioButton();
+      this.line1 = new Cyotek.Windows.Forms.Line();
+      this.atkinsonRadioButton = new System.Windows.Forms.RadioButton();
+      this.sierraLiteRadioButton = new System.Windows.Forms.RadioButton();
+      this.sierra2RadioButton = new System.Windows.Forms.RadioButton();
+      this.sierra3RadioButton = new System.Windows.Forms.RadioButton();
+      this.stuckiRadioButton = new System.Windows.Forms.RadioButton();
+      this.jarvisJudiceNinkeDitheringradioButton = new System.Windows.Forms.RadioButton();
       this.burkesRadioButton = new System.Windows.Forms.RadioButton();
       this.noneRadioButton = new System.Windows.Forms.RadioButton();
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -46,6 +54,7 @@
       this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.horizontalToolStripButton = new System.Windows.Forms.ToolStripButton();
+      this.refreshButton = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.rootSplitContainer)).BeginInit();
       this.rootSplitContainer.Panel1.SuspendLayout();
       this.rootSplitContainer.Panel2.SuspendLayout();
@@ -186,6 +195,15 @@
       this.ditheringModeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+      this.ditheringModeGroupBox.Controls.Add(this.refreshButton);
+      this.ditheringModeGroupBox.Controls.Add(this.randomRadioButton);
+      this.ditheringModeGroupBox.Controls.Add(this.line1);
+      this.ditheringModeGroupBox.Controls.Add(this.atkinsonRadioButton);
+      this.ditheringModeGroupBox.Controls.Add(this.sierraLiteRadioButton);
+      this.ditheringModeGroupBox.Controls.Add(this.sierra2RadioButton);
+      this.ditheringModeGroupBox.Controls.Add(this.sierra3RadioButton);
+      this.ditheringModeGroupBox.Controls.Add(this.stuckiRadioButton);
+      this.ditheringModeGroupBox.Controls.Add(this.jarvisJudiceNinkeDitheringradioButton);
       this.ditheringModeGroupBox.Controls.Add(this.burkesRadioButton);
       this.ditheringModeGroupBox.Controls.Add(this.noneRadioButton);
       this.ditheringModeGroupBox.Controls.Add(this.floydSteinbergRadioButton);
@@ -195,6 +213,93 @@
       this.ditheringModeGroupBox.TabIndex = 1;
       this.ditheringModeGroupBox.TabStop = false;
       this.ditheringModeGroupBox.Text = "Dithering Algorithm";
+      // 
+      // randomRadioButton
+      // 
+      this.randomRadioButton.AutoSize = true;
+      this.randomRadioButton.Location = new System.Drawing.Point(6, 234);
+      this.randomRadioButton.Name = "randomRadioButton";
+      this.randomRadioButton.Size = new System.Drawing.Size(65, 17);
+      this.randomRadioButton.TabIndex = 10;
+      this.randomRadioButton.Text = "Rando&m";
+      this.randomRadioButton.UseVisualStyleBackColor = true;
+      this.randomRadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
+      // 
+      // line1
+      // 
+      this.line1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.line1.Location = new System.Drawing.Point(6, 226);
+      this.line1.Name = "line1";
+      this.line1.Size = new System.Drawing.Size(175, 2);
+      this.line1.TabIndex = 9;
+      this.line1.Text = "line1";
+      // 
+      // atkinsonRadioButton
+      // 
+      this.atkinsonRadioButton.AutoSize = true;
+      this.atkinsonRadioButton.Location = new System.Drawing.Point(6, 203);
+      this.atkinsonRadioButton.Name = "atkinsonRadioButton";
+      this.atkinsonRadioButton.Size = new System.Drawing.Size(66, 17);
+      this.atkinsonRadioButton.TabIndex = 8;
+      this.atkinsonRadioButton.Text = "&Atkinson";
+      this.atkinsonRadioButton.UseVisualStyleBackColor = true;
+      this.atkinsonRadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
+      // 
+      // sierraLiteRadioButton
+      // 
+      this.sierraLiteRadioButton.AutoSize = true;
+      this.sierraLiteRadioButton.Location = new System.Drawing.Point(6, 180);
+      this.sierraLiteRadioButton.Name = "sierraLiteRadioButton";
+      this.sierraLiteRadioButton.Size = new System.Drawing.Size(72, 17);
+      this.sierraLiteRadioButton.TabIndex = 7;
+      this.sierraLiteRadioButton.Text = "Sierra &Lite";
+      this.sierraLiteRadioButton.UseVisualStyleBackColor = true;
+      this.sierraLiteRadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
+      // 
+      // sierra2RadioButton
+      // 
+      this.sierra2RadioButton.AutoSize = true;
+      this.sierra2RadioButton.Location = new System.Drawing.Point(6, 157);
+      this.sierra2RadioButton.Name = "sierra2RadioButton";
+      this.sierra2RadioButton.Size = new System.Drawing.Size(101, 17);
+      this.sierra2RadioButton.TabIndex = 6;
+      this.sierra2RadioButton.Text = "&Two Row Sierra";
+      this.sierra2RadioButton.UseVisualStyleBackColor = true;
+      this.sierra2RadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
+      // 
+      // sierra3RadioButton
+      // 
+      this.sierra3RadioButton.AutoSize = true;
+      this.sierra3RadioButton.Location = new System.Drawing.Point(6, 134);
+      this.sierra3RadioButton.Name = "sierra3RadioButton";
+      this.sierra3RadioButton.Size = new System.Drawing.Size(52, 17);
+      this.sierra3RadioButton.TabIndex = 5;
+      this.sierra3RadioButton.Text = "S&ierra";
+      this.sierra3RadioButton.UseVisualStyleBackColor = true;
+      this.sierra3RadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
+      // 
+      // stuckiRadioButton
+      // 
+      this.stuckiRadioButton.AutoSize = true;
+      this.stuckiRadioButton.Location = new System.Drawing.Point(6, 111);
+      this.stuckiRadioButton.Name = "stuckiRadioButton";
+      this.stuckiRadioButton.Size = new System.Drawing.Size(55, 17);
+      this.stuckiRadioButton.TabIndex = 4;
+      this.stuckiRadioButton.Text = "St&ucki";
+      this.stuckiRadioButton.UseVisualStyleBackColor = true;
+      this.stuckiRadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
+      // 
+      // jarvisJudiceNinkeDitheringradioButton
+      // 
+      this.jarvisJudiceNinkeDitheringradioButton.AutoSize = true;
+      this.jarvisJudiceNinkeDitheringradioButton.Location = new System.Drawing.Point(6, 88);
+      this.jarvisJudiceNinkeDitheringradioButton.Name = "jarvisJudiceNinkeDitheringradioButton";
+      this.jarvisJudiceNinkeDitheringradioButton.Size = new System.Drawing.Size(129, 17);
+      this.jarvisJudiceNinkeDitheringradioButton.TabIndex = 3;
+      this.jarvisJudiceNinkeDitheringradioButton.Text = "&Jarvis, Judice && Ninke";
+      this.jarvisJudiceNinkeDitheringradioButton.UseVisualStyleBackColor = true;
+      this.jarvisJudiceNinkeDitheringradioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
       // 
       // burkesRadioButton
       // 
@@ -390,6 +495,17 @@
       this.horizontalToolStripButton.Text = "Horizontal";
       this.horizontalToolStripButton.Click += new System.EventHandler(this.horizontalSplitToolStripMenuItem_Click);
       // 
+      // refreshButton
+      // 
+      this.refreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.refreshButton.Location = new System.Drawing.Point(106, 231);
+      this.refreshButton.Name = "refreshButton";
+      this.refreshButton.Size = new System.Drawing.Size(75, 23);
+      this.refreshButton.TabIndex = 11;
+      this.refreshButton.Text = "&Refresh";
+      this.refreshButton.UseVisualStyleBackColor = true;
+      this.refreshButton.Click += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -455,6 +571,15 @@
     private System.Windows.Forms.GroupBox colorConversionGroupBox;
     private System.Windows.Forms.NumericUpDown thresholdNumericUpDown;
     private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.RadioButton jarvisJudiceNinkeDitheringradioButton;
+    private System.Windows.Forms.RadioButton stuckiRadioButton;
+    private System.Windows.Forms.RadioButton sierra3RadioButton;
+    private System.Windows.Forms.RadioButton sierra2RadioButton;
+    private System.Windows.Forms.RadioButton sierraLiteRadioButton;
+    private System.Windows.Forms.RadioButton atkinsonRadioButton;
+    private System.Windows.Forms.RadioButton randomRadioButton;
+    private Windows.Forms.Line line1;
+    private System.Windows.Forms.Button refreshButton;
   }
 }
 

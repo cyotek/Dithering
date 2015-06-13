@@ -7,29 +7,29 @@
  */
 
 /*
- * Burkes Dithering
+ * Sierra Lite Dithering
  * http://www.efg2.com/Lab/Library/ImageProcessing/DHALF.TXT
  *
- *                  *  8/32 4/32
- *      2/32 4/32 8/32 4/32 2/32
+ *           *  2/4
+ *      1/4 1/4
  */
 
 namespace Cyotek.Drawing.Imaging.ColorReduction
 {
-  public sealed class BurksDithering : ErrorDiffusionDithering
+  public sealed class SierraLiteDithering : ErrorDiffusionDithering
   {
     #region Constructors
 
-    public BurksDithering()
+    public SierraLiteDithering()
       : base(new byte[,]
              {
                {
-                 0, 0, 0, 8, 4
+                 0, 0, 2
                },
                {
-                 2, 4, 8, 4, 2
+                 1, 1, 0
                }
-             }, 5, true)
+             }, 2, true)
     { }
 
     #endregion

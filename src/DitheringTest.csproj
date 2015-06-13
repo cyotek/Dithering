@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
@@ -55,12 +56,24 @@
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ArgbColor.cs" />
+    <Compile Include="Design\LineDesigner.cs" />
+    <Compile Include="Dithering\AtkinsonDithering.cs" />
+    <Compile Include="Dithering\ErrorDiffusionDithering.cs" />
+    <Compile Include="Dithering\JarvisJudiceNinkeDithering.cs" />
+    <Compile Include="Dithering\RandomDithering.cs" />
+    <Compile Include="Dithering\Sierra2Dithering.cs" />
+    <Compile Include="Dithering\Sierra3Dithering.cs" />
+    <Compile Include="Dithering\SierraLiteDithering.cs" />
+    <Compile Include="Dithering\StuckiDithering.cs" />
     <Compile Include="Helpers\ClipboardHelpers.cs" />
     <Compile Include="Dithering\BurkesDithering.cs" />
     <Compile Include="Dithering\FloydSteinbergDithering.cs" />
     <Compile Include="Dithering\IErrorDiffusion.cs" />
     <Compile Include="Helpers\ImageUtilities.cs" />
     <Compile Include="Helpers\IntegerExtensions.cs" />
+    <Compile Include="Line.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
