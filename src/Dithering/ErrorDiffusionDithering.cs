@@ -1,5 +1,5 @@
-﻿/* Dithering an image using the Burkes algorithm in C#
- * http://www.cyotek.com/blog/dithering-an-image-using-the-floyd-steinberg-algorithm-in-csharp
+﻿/* Even more algorithms for dithering images using C#
+ * http://www.cyotek.com/blog/even-more-algorithms-for-dithering-images-using-csharp
  *
  * Copyright © 2015 Cyotek Ltd.
  *
