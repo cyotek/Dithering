@@ -1,6 +1,8 @@
 *.suo
 *.user
+*.ndproj
 
 packages
 bin
 obj
+NDependOut

@@ -93,6 +93,9 @@ namespace Cyotek.Drawing.Imaging.ColorReduction
             int newR;
             int newG;
             int newB;
+            byte r;
+            byte g;
+            byte b;
 
             offsetIndex = offsetY * width + offsetX;
             offsetPixel = data[offsetIndex];
@@ -113,11 +116,11 @@ namespace Cyotek.Drawing.Imaging.ColorReduction
               newB = (blueError * coefficient) / _divisor;
             }
 
-            offsetPixel.R = (offsetPixel.R + newR).ToByte();
-            offsetPixel.G = (offsetPixel.G + newG).ToByte();
-            offsetPixel.B = (offsetPixel.B + newB).ToByte();
+            r = (offsetPixel.R + newR).ToByte();
+            g = (offsetPixel.G + newG).ToByte();
+            b = (offsetPixel.B + newB).ToByte();
 
-            data[offsetIndex] = offsetPixel;
+            data[offsetIndex] = ArgbColor.FromArgb(offsetPixel.A, r, g, b);
           }
         }
       }

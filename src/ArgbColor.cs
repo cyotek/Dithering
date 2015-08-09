@@ -49,5 +49,10 @@ namespace Cyotek.Drawing
       G = (byte)green;
       B = (byte)blue;
     }
+
+    internal static ArgbColor FromArgb(byte a, byte r, byte g, byte b)
+    {
+      return new ArgbColor(a, r, g, b);
+    }
   }
 }
