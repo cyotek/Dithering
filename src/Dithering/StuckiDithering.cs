@@ -15,8 +15,11 @@
  *      1/42 2/42 4/42 2/42 1/42
  */
 
+using System.ComponentModel;
+
 namespace Cyotek.Drawing.Imaging.ColorReduction
 {
+  [Description("Stucki")]
   public sealed class StuckiDithering : ErrorDiffusionDithering
   {
     #region Constructors

@@ -15,8 +15,11 @@
  *           2/32 3/32 2/32
  */
 
+using System.ComponentModel;
+
 namespace Cyotek.Drawing.Imaging.ColorReduction
 {
+  [Description("Sierra")]
   public sealed class Sierra3Dithering : ErrorDiffusionDithering
   {
     #region Constructors

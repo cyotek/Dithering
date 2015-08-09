@@ -7,9 +7,11 @@
  */
 
 using System;
+using System.ComponentModel;
 
 namespace Cyotek.Drawing.Imaging.ColorReduction
 {
+  [Description("Random")]
   public sealed class RandomDithering : IErrorDiffusion
   {
     #region Constants

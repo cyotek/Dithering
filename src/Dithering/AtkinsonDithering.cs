@@ -15,8 +15,11 @@
  *          1/8
  */
 
+using System.ComponentModel;
+
 namespace Cyotek.Drawing.Imaging.ColorReduction
 {
+  [Description("Atkinson")]
   public sealed class AtkinsonDithering : ErrorDiffusionDithering
   {
     #region Constructors

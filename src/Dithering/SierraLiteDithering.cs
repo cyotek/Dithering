@@ -14,8 +14,11 @@
  *      1/4 1/4
  */
 
+using System.ComponentModel;
+
 namespace Cyotek.Drawing.Imaging.ColorReduction
 {
+  [Description("Sierra Lite")]
   public sealed class SierraLiteDithering : ErrorDiffusionDithering
   {
     #region Constructors

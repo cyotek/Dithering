@@ -15,8 +15,11 @@
  *      1/48 3/48 5/48 3/48 1/48
  */
 
+using System.ComponentModel;
+
 namespace Cyotek.Drawing.Imaging.ColorReduction
 {
+  [Description("Jarvis, Judice & Ninke")]
   public sealed class JarvisJudiceNinkeDithering : ErrorDiffusionDithering
   {
     #region Constructors

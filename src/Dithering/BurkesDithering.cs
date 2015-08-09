@@ -14,8 +14,11 @@
  *      2/32 4/32 8/32 4/32 2/32
  */
 
+using System.ComponentModel;
+
 namespace Cyotek.Drawing.Imaging.ColorReduction
 {
+  [Description("Burkes")]
   public sealed class BurksDithering : ErrorDiffusionDithering
   {
     #region Constructors
