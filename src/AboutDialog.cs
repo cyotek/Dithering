@@ -33,6 +33,10 @@ namespace Cyotek.DitheringTest
       nameLabel.Text = versionInfo.ProductName;
       copyrightLabel.Text = versionInfo.LegalCopyright;
 
+      this.SetLink(ossLinkLabel, "GitHub", "https://github.com/cyotek/Cyotek.Windows.Forms.ImageBox");
+      this.SetLink(ossLinkLabel, "cyotek.com", "http://www.cyotek.com/blog/tag/imagebox");
+      this.SetLink(ossLinkLabel, "another article", "http://www.cyotek.com/blog/creating-a-groupbox-containing-an-image-and-a-custom-display-rectangle");
+
       base.OnLoad(e);
     }
 
@@ -41,16 +45,65 @@ namespace Cyotek.DitheringTest
       this.Close();
     }
 
-    private void webLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    private bool HasLink(LinkLabel.LinkCollection links, int position)
+    {
+      bool result;
+
+      result = false;
+
+      if (links.LinksAdded)
+      {
+        for (int i = 0; i < links.Count; i++)
+        {
+          LinkLabel.Link link;
+
+          link = links[i];
+
+          if (position >= link.Start && position <= link.Start + link.Length)
+          {
+            result = true;
+            break;
+          }
+        }
+      }
+
+      return result;
+    }
+
+    private void ossLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+      this.RunUrl((string)e.Link.LinkData);
+    }
+
+    private void RunUrl(string url)
     {
       try
       {
-        Process.Start("http://www.cyotek.com");
+        Process.Start(url);
       }
       catch (Exception ex)
       {
         MessageBox.Show(ex.GetBaseException().Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
+    }
+
+    private void SetLink(LinkLabel control, string match, string url)
+    {
+      int index;
+
+      index = -1;
+
+      do
+      {
+        index = control.Text.IndexOf(match, index + 1, StringComparison.Ordinal);
+      } while (index != -1 && this.HasLink(control.Links, index));
+
+      control.Links.Add(index, match.Length, url);
+    }
+
+    private void webLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+      this.RunUrl("http://www.cyotek.com");
     }
 
     #endregion

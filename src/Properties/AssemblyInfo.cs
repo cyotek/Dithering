@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Cyotek Ltd")]
 [assembly: AssemblyProduct("Cyotek Dithering Test")]
-[assembly: AssemblyCopyright("Copyright © 2015 Cyotek Ltd. All Rights Reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2015-2017 Cyotek Ltd. All Rights Reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

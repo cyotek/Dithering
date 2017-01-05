@@ -59,13 +59,21 @@
     <Compile Include="ArgbColor.cs" />
     <Compile Include="Design\LineDesigner.cs" />
     <Compile Include="Dithering\AtkinsonDithering.cs" />
+    <Compile Include="Dithering\Bayer2.cs" />
+    <Compile Include="Dithering\Bayer3.cs" />
+    <Compile Include="Dithering\Bayer4.cs" />
+    <Compile Include="Dithering\Bayer8.cs" />
     <Compile Include="Dithering\ErrorDiffusionDithering.cs" />
     <Compile Include="Dithering\JarvisJudiceNinkeDithering.cs" />
+    <Compile Include="Dithering\OrderedDithering.cs" />
     <Compile Include="Dithering\RandomDithering.cs" />
     <Compile Include="Dithering\Sierra2Dithering.cs" />
     <Compile Include="Dithering\Sierra3Dithering.cs" />
     <Compile Include="Dithering\SierraLiteDithering.cs" />
     <Compile Include="Dithering\StuckiDithering.cs" />
+    <Compile Include="GroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Helpers\ClipboardHelpers.cs" />
     <Compile Include="Dithering\BurkesDithering.cs" />
     <Compile Include="Dithering\FloydSteinbergDithering.cs" />

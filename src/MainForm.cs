@@ -112,11 +112,13 @@ namespace Cyotek.DitheringTest
       ArgbColor[] originalData;
       Size size;
       IErrorDiffusion dither;
+      bool performTransform;
 
       this.CleanUpTransformed();
 
       image = _image;
       size = image.Size;
+      performTransform = transformCheckBox.Checked;
 
       originalData = image.GetPixelsFrom32BitArgbImage();
 
@@ -137,14 +139,18 @@ namespace Cyotek.DitheringTest
           // transform the pixel - normally this would be some form of color
           // reduction. For this sample it's simple threshold based
           // monochrome conversion
-          transformed = this.TransformPixel(current);
-          originalData[index] = transformed;
+          if (performTransform)
+          {
+            transformed = this.TransformPixel(current);
+            originalData[index] = transformed;
+          }
+          else
+          {
+            transformed = current;
+          }
 
           // apply a dither algorithm to this pixel
-          if (dither != null)
-          {
-            dither.Diffuse(originalData, current, transformed, col, row, size.Width, size.Height);
-          }
+          dither?.Diffuse(originalData, current, transformed, col, row, size.Width, size.Height);
         }
       }
 
@@ -160,8 +166,26 @@ namespace Cyotek.DitheringTest
 
     private void DitherCheckBoxCheckedChangedHandler(object sender, EventArgs e)
     {
+      RadioButton control;
+
+      // RadioButtons maintain their state per container. However, I'm using multiple
+      // containers so I need to manually reset the previous selection otherwise
+      // you will have multiple checked items at once.
+
+      control = sender as RadioButton;
+      if (control != null && control.Checked )
+      {
+        if (!object.ReferenceEquals(control, _previousSelection) && _previousSelection != null)
+        {
+          _previousSelection.Checked = false;
+        }
+        _previousSelection = control;
+      }
+
       this.CreateTransformedImage();
     }
+
+    private RadioButton _previousSelection;
 
     private void exitToolStripMenuItem_Click(object sender, EventArgs e)
     {
@@ -207,6 +231,22 @@ namespace Cyotek.DitheringTest
       else if (randomRadioButton.Checked)
       {
         result = new RandomDithering();
+      }
+      else if (bayer2RadioButton.Checked)
+      {
+        result = new Bayer2();
+      }
+      else if (bayer3RadioButton.Checked)
+      {
+        result = new Bayer3();
+      }
+      else if (bayer4RadioButton.Checked)
+      {
+        result = new Bayer4();
+      }
+      else if (bayer8RadioButton.Checked)
+      {
+        result = new Bayer8();
       }
       else
       {
@@ -274,11 +314,11 @@ namespace Cyotek.DitheringTest
     private void openToolStripMenuItem_Click(object sender, EventArgs e)
     {
       using (FileDialog dialog = new OpenFileDialog
-                                 {
-                                   Title = "Open Image",
-                                   DefaultExt = "png",
-                                   Filter = "All Pictures (*.emf;*.wmf;*.jpg;*.jpeg;*.jfif;*.jpe;*.png;*.bmp;*.dib;*.rle;*.gif;*.tif;*.tiff)|*.emf;*.wmf;*.jpg;*.jpeg;*.jfif;*.jpe;*.png;*.bmp;*.dib;*.rle;*.gif;*.tif;*.tiff|Windows Enhanced Metafile (*.emf)|*.emf|Windows Metafile (*.wmf)|*.wmf|JPEG File Interchange Format (*.jpg;*.jpeg;*.jfif;*.jpe)|*.jpg;*.jpeg;*.jfif;*.jpe|Portable Networks Graphic (*.png)|*.png|Windows Bitmap (*.bmp;*.dib;*.rle)|*.bmp;*.dib;*.rle|Graphics Interchange Format (*.gif)|*.gif|Tagged Image File Format (*.tif;*.tiff)|*.tif;*.tiff|All files (*.*)|*.*"
-                                 })
+      {
+        Title = "Open Image",
+        DefaultExt = "png",
+        Filter = "All Pictures (*.emf;*.wmf;*.jpg;*.jpeg;*.jfif;*.jpe;*.png;*.bmp;*.dib;*.rle;*.gif;*.tif;*.tiff)|*.emf;*.wmf;*.jpg;*.jpeg;*.jfif;*.jpe;*.png;*.bmp;*.dib;*.rle;*.gif;*.tif;*.tiff|Windows Enhanced Metafile (*.emf)|*.emf|Windows Metafile (*.wmf)|*.wmf|JPEG File Interchange Format (*.jpg;*.jpeg;*.jfif;*.jpe)|*.jpg;*.jpeg;*.jfif;*.jpe|Portable Networks Graphic (*.png)|*.png|Windows Bitmap (*.bmp;*.dib;*.rle)|*.bmp;*.dib;*.rle|Graphics Interchange Format (*.gif)|*.gif|Tagged Image File Format (*.tif;*.tiff)|*.tif;*.tiff|All files (*.*)|*.*"
+      })
       {
         if (dialog.ShowDialog(this) == DialogResult.OK)
         {
@@ -336,11 +376,11 @@ namespace Cyotek.DitheringTest
     private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
     {
       using (FileDialog dialog = new SaveFileDialog
-                                 {
-                                   Title = "Save Image As",
-                                   DefaultExt = "png",
-                                   Filter = "Portable Networks Graphic (*.png)|*.png|All files (*.*)|*.*"
-                                 })
+      {
+        Title = "Save Image As",
+        DefaultExt = "png",
+        Filter = "Portable Networks Graphic (*.png)|*.png|All files (*.*)|*.*"
+      })
       {
         if (dialog.ShowDialog(this) == DialogResult.OK)
         {
@@ -377,5 +417,14 @@ namespace Cyotek.DitheringTest
     }
 
     #endregion
+
+    private void transformCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+      convertPanel.Enabled = transformCheckBox.Checked;
+
+      this.CreateTransformedImage();
+    }
+
+    private ArgbColor[] _map = { new ArgbColor(0, 0, 0), new ArgbColor(255, 0, 0), new ArgbColor(0, 255, 0), new ArgbColor(0, 0, 255), new ArgbColor(255, 255, 0), new ArgbColor(255, 0, 255), new ArgbColor(0, 255, 255), new ArgbColor(255, 255, 255) };
   }
 }
