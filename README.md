@@ -14,6 +14,13 @@ Please refer to the following articles on cyotek.com for more details
 
 Resources
 ---------
-`DHALF.TXT` was obtained from <http://www.efg2.com/Lab/Library/ImageProcessing/DHALF.TXT>
+`DHALF.TXT` was obtained from <http://www.efg2.com/Lab/Library/ImageProcessing/DHALF.TXT>  
 `DITHER.TXT` was obtained from <http://cd.textfiles.com/graphics16000/FORMATS/GIF/DITHER2.TXT>
+
+Referenced, but missing - if you find copies of these documents let [me know!](https://github.com/cyotek/Dithering/issues)
+
+* BURKES.ARC
+* NUDTHR.ARC
+* IDTVGA.TXT
+* DGIF.ZIP
 
