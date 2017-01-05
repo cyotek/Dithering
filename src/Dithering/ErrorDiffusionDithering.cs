@@ -62,6 +62,9 @@ namespace Cyotek.Drawing.Imaging.ColorReduction
 
     #region IErrorDiffusion Interface
 
+    bool IErrorDiffusion.Prescan
+    { get { return false; } }
+
     void IErrorDiffusion.Diffuse(ArgbColor[] data, ArgbColor original, ArgbColor transformed, int x, int y, int width, int height)
     {
       int redError;
@@ -111,9 +114,9 @@ namespace Cyotek.Drawing.Imaging.ColorReduction
             }
             else
             {
-              newR = (redError * coefficient) / _divisor;
-              newG = (greenError * coefficient) / _divisor;
-              newB = (blueError * coefficient) / _divisor;
+              newR = redError * coefficient / _divisor;
+              newG = greenError * coefficient / _divisor;
+              newB = blueError * coefficient / _divisor;
             }
 
             r = (offsetPixel.R + newR).ToByte();

@@ -12,6 +12,7 @@ using System.ComponentModel;
 namespace Cyotek.Drawing.Imaging.ColorReduction
 {
   [Description("Random")]
+  [Browsable(false)]
   public sealed class RandomDithering : IErrorDiffusion
   {
     #region Constants
@@ -52,6 +53,9 @@ namespace Cyotek.Drawing.Imaging.ColorReduction
     #endregion
 
     #region IErrorDiffusion Interface
+
+    bool IErrorDiffusion.Prescan
+    { get { return false; } }
 
     void IErrorDiffusion.Diffuse(ArgbColor[] data, ArgbColor original, ArgbColor transformed, int x, int y, int width, int height)
     {
