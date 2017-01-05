@@ -26,33 +26,21 @@ namespace Cyotek.DitheringTest.Transforms
 
     #region Methods
 
-    private long D(byte z, ArgbColor current, ArgbColor match)
+    private int GetDistance(ArgbColor current, ArgbColor match)
     {
+      int redDifference;
+      int greenDifference;
+      int blueDifference;
+
       /*
        * #define D(z) (line[z][x]-colormap[c][z])          // corrected color.
        */
-      byte lhs;
-      byte rhs;
 
-      switch (z)
-      {
-        case 0:
-          lhs = current.R;
-          rhs = match.R;
-          break;
-        case 1:
-          lhs = current.G;
-          rhs = match.G;
-          break;
-        case 2:
-          lhs = current.B;
-          rhs = match.B;
-          break;
-        default:
-          throw new ArgumentException("Invalid channel.", nameof(z));
-      }
+      redDifference = current.R - match.R;
+      greenDifference = current.G - match.G;
+      blueDifference = current.B - match.B;
 
-      return lhs - rhs;
+      return redDifference * redDifference + greenDifference * greenDifference + blueDifference * blueDifference;
     }
 
     private int FindNearestColor(ArgbColor current)
@@ -70,26 +58,24 @@ namespace Cyotek.DitheringTest.Transforms
       *                 }
       *             }
       */
-      long sdist;
+      int shortestDistance;
       int index;
 
       index = 0;
-      sdist = long.MaxValue;
+      shortestDistance = int.MaxValue;
 
       for (int i = 0; i < _map.Length; i++)
       {
-        long dist;
         ArgbColor match;
+        int distance;
 
         match = _map[i];
+        distance = this.GetDistance(current, match);
 
-        // Could do with C# 7's inline functions here ;)
-        dist = this.D(0, current, match) * this.D(0, current, match) + this.D(1, current, match) * this.D(1, current, match) + this.D(2, current, match) * this.D(2, current, match);
-
-        if (dist < sdist)
+        if (distance < shortestDistance)
         {
           index = i;
-          sdist = dist;
+          shortestDistance = distance;
         }
       }
 

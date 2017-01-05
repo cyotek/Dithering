@@ -1,11 +1,13 @@
 ﻿#define USEWORKER
 //#undef USEWORKER
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Media;
+using System.Threading;
 using System.Windows.Forms;
 using Cyotek.DitheringTest.Helpers;
 using Cyotek.DitheringTest.Transforms;
@@ -29,7 +31,9 @@ namespace Cyotek.DitheringTest
 
     private Bitmap _image;
 
-    private RadioButton _previousSelection;
+    private RadioButton _previousDitherSelection;
+
+    private RadioButton _previousTransformSelection;
 
     private Bitmap _transformed;
 
@@ -74,7 +78,7 @@ namespace Cyotek.DitheringTest
       base.OnShown(e);
 
       paletteSizeComboBox.SelectedIndex = 0;
-      noneRadioButton.Checked = true;
+      noDitherRadioButton.Checked = true;
 
       this.OpenImage(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"resources\sample.png"));
 
@@ -88,6 +92,11 @@ namespace Cyotek.DitheringTest
       {
         dialog.ShowDialog(this);
       }
+    }
+
+    private void actualSizeToolStripButton_Click(object sender, EventArgs e)
+    {
+      originalImageBox.ActualSize();
     }
 
     private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -111,6 +120,15 @@ namespace Cyotek.DitheringTest
       {
         _transformed = e.Result as Bitmap;
         transformedImageBox.Image = _transformed;
+
+        ThreadPool.QueueUserWorkItem(state =>
+                                     {
+                                       int count;
+
+                                       count = this.GetColorCount(_transformed);
+
+                                       this.UpdateColorCount(transformedColorsToolStripStatusLabel, count);
+                                     });
       }
 
       statusToolStripStatusLabel.Text = string.Empty;
@@ -135,6 +153,7 @@ namespace Cyotek.DitheringTest
     private void CleanUpTransformed()
     {
       transformedImageBox.Image = null;
+      transformedColorsToolStripStatusLabel.Text = string.Empty;
 
       if (_transformed != null)
       {
@@ -151,21 +170,7 @@ namespace Cyotek.DitheringTest
 
     private void DitherCheckBoxCheckedChangedHandler(object sender, EventArgs e)
     {
-      RadioButton control;
-
-      // RadioButtons maintain their state per container. However, I'm using multiple
-      // containers so I need to manually reset the previous selection otherwise
-      // you will have multiple checked items at once.
-
-      control = sender as RadioButton;
-      if (control != null && control.Checked)
-      {
-        if (!ReferenceEquals(control, _previousSelection) && _previousSelection != null)
-        {
-          _previousSelection.Checked = false;
-        }
-        _previousSelection = control;
-      }
+      this.UpdateRadioSelection(sender as RadioButton, ref _previousDitherSelection);
 
       refreshButton.Enabled = randomRadioButton.Checked;
 
@@ -175,6 +180,20 @@ namespace Cyotek.DitheringTest
     private void exitToolStripMenuItem_Click(object sender, EventArgs e)
     {
       this.Close();
+    }
+
+    private int GetColorCount(Bitmap image)
+    {
+      HashSet<int> colors;
+
+      colors = new HashSet<int>();
+
+      foreach (ArgbColor color in image.GetPixelsFrom32BitArgbImage())
+      {
+        colors.Add(color.ToArgb());
+      }
+
+      return colors.Count;
     }
 
     private IErrorDiffusion GetDitheringInstance()
@@ -251,7 +270,7 @@ namespace Cyotek.DitheringTest
       {
         result = new MonochromePixelTransform((byte)thresholdNumericUpDown.Value);
       }
-      else
+      else if (colorRadioButton.Checked)
       {
         switch (paletteSizeComboBox.SelectedIndex)
         {
@@ -275,9 +294,41 @@ namespace Cyotek.DitheringTest
       Bitmap result;
       ArgbColor[] pixelData;
       Size size;
+      bool inline;
 
       size = image.Size;
       pixelData = image.GetPixelsFrom32BitArgbImage();
+
+      if (dither != null)
+      {
+        if (dither.Prescan)
+        {
+          inline = false;
+
+          for (int row = 0; row < size.Height; row++)
+          {
+            for (int col = 0; col < size.Width; col++)
+            {
+              int index;
+              ArgbColor current;
+
+              index = row * size.Width + col;
+
+              current = pixelData[index];
+
+              dither.Diffuse(pixelData, current, current, col, row, size.Width, size.Height);
+            }
+          }
+        }
+        else
+        {
+          inline = true;
+        }
+      }
+      else
+      {
+        inline = false;
+      }
 
       for (int row = 0; row < size.Height; row++)
       {
@@ -305,7 +356,10 @@ namespace Cyotek.DitheringTest
           }
 
           // apply a dither algorithm to this pixel
-          dither?.Diffuse(pixelData, current, transformed, col, row, size.Width, size.Height);
+          if (inline)
+          {
+            dither.Diffuse(pixelData, current, transformed, col, row, size.Width, size.Height);
+          }
         }
       }
 
@@ -336,17 +390,7 @@ namespace Cyotek.DitheringTest
 
     private void monochromeRadioButton_CheckedChanged(object sender, EventArgs e)
     {
-      if (((RadioButton)sender).Checked)
-      {
-        if (ReferenceEquals(sender, monochromeRadioButton))
-        {
-          colorRadioButton.Checked = false;
-        }
-        else
-        {
-          monochromeRadioButton.Checked = false;
-        }
-      }
+      this.UpdateRadioSelection(sender as RadioButton, ref _previousTransformSelection);
 
       monochromePanel.Enabled = monochromeRadioButton.Checked;
       colorPanel.Enabled = colorRadioButton.Checked;
@@ -371,6 +415,15 @@ namespace Cyotek.DitheringTest
       originalImageBox.Image = _image;
       originalImageBox.ActualSize();
 
+      ThreadPool.QueueUserWorkItem(state =>
+                                   {
+                                     int count;
+
+                                     count = this.GetColorCount(_image);
+
+                                     this.UpdateColorCount(originalColorsToolStripStatusLabel, count);
+                                   });
+
       this.RequestImageTransform();
     }
 
@@ -392,11 +445,11 @@ namespace Cyotek.DitheringTest
     private void openToolStripMenuItem_Click(object sender, EventArgs e)
     {
       using (FileDialog dialog = new OpenFileDialog
-      {
-        Title = "Open Image",
-        DefaultExt = "png",
-        Filter = "All Pictures (*.emf;*.wmf;*.jpg;*.jpeg;*.jfif;*.jpe;*.png;*.bmp;*.dib;*.rle;*.gif;*.tif;*.tiff)|*.emf;*.wmf;*.jpg;*.jpeg;*.jfif;*.jpe;*.png;*.bmp;*.dib;*.rle;*.gif;*.tif;*.tiff|Windows Enhanced Metafile (*.emf)|*.emf|Windows Metafile (*.wmf)|*.wmf|JPEG File Interchange Format (*.jpg;*.jpeg;*.jfif;*.jpe)|*.jpg;*.jpeg;*.jfif;*.jpe|Portable Networks Graphic (*.png)|*.png|Windows Bitmap (*.bmp;*.dib;*.rle)|*.bmp;*.dib;*.rle|Graphics Interchange Format (*.gif)|*.gif|Tagged Image File Format (*.tif;*.tiff)|*.tif;*.tiff|All files (*.*)|*.*"
-      })
+                                 {
+                                   Title = "Open Image",
+                                   DefaultExt = "png",
+                                   Filter = "All Pictures (*.emf;*.wmf;*.jpg;*.jpeg;*.jfif;*.jpe;*.png;*.bmp;*.dib;*.rle;*.gif;*.tif;*.tiff)|*.emf;*.wmf;*.jpg;*.jpeg;*.jfif;*.jpe;*.png;*.bmp;*.dib;*.rle;*.gif;*.tif;*.tiff|Windows Enhanced Metafile (*.emf)|*.emf|Windows Metafile (*.wmf)|*.wmf|JPEG File Interchange Format (*.jpg;*.jpeg;*.jfif;*.jpe)|*.jpg;*.jpeg;*.jfif;*.jpe|Portable Networks Graphic (*.png)|*.png|Windows Bitmap (*.bmp;*.dib;*.rle)|*.bmp;*.dib;*.rle|Graphics Interchange Format (*.gif)|*.gif|Tagged Image File Format (*.tif;*.tiff)|*.tif;*.tiff|All files (*.*)|*.*"
+                                 })
       {
         if (dialog.ShowDialog(this) == DialogResult.OK)
         {
@@ -433,6 +486,8 @@ namespace Cyotek.DitheringTest
       this.DefineImageBoxes(sender, out source, out dest);
 
       dest.Zoom = source.Zoom;
+
+      zoomToolStripStatusLabel.Text = source.Zoom + "%";
     }
 
     private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -478,11 +533,11 @@ namespace Cyotek.DitheringTest
     private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
     {
       using (FileDialog dialog = new SaveFileDialog
-      {
-        Title = "Save Image As",
-        DefaultExt = "png",
-        Filter = "Portable Networks Graphic (*.png)|*.png|All files (*.*)|*.*"
-      })
+                                 {
+                                   Title = "Save Image As",
+                                   DefaultExt = "png",
+                                   Filter = "Portable Networks Graphic (*.png)|*.png|All files (*.*)|*.*"
+                                 })
       {
         if (dialog.ShowDialog(this) == DialogResult.OK)
         {
@@ -501,6 +556,34 @@ namespace Cyotek.DitheringTest
     private void thresholdNumericUpDown_ValueChanged(object sender, EventArgs e)
     {
       this.RequestImageTransform();
+    }
+
+    private void UpdateColorCount(ToolStripItem control, int count)
+    {
+      if (this.InvokeRequired)
+      {
+        this.Invoke(new Action<ToolStripItem, int>(this.UpdateColorCount), control, count);
+      }
+      else
+      {
+        control.Text = count.ToString();
+      }
+    }
+
+    private void UpdateRadioSelection(RadioButton control, ref RadioButton previousSelection)
+    {
+      // RadioButtons maintain their state per container. However, I'm using multiple
+      // containers so I need to manually reset the previous selection otherwise
+      // you will have multiple checked items at once.
+
+      if (control != null && control.Checked)
+      {
+        if (!ReferenceEquals(control, previousSelection) && previousSelection != null)
+        {
+          previousSelection.Checked = false;
+        }
+        previousSelection = control;
+      }
     }
 
     #endregion

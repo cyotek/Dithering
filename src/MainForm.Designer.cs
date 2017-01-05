@@ -40,7 +40,7 @@
       this.burkesRadioButton = new System.Windows.Forms.RadioButton();
       this.jarvisJudiceNinkeDitheringradioButton = new System.Windows.Forms.RadioButton();
       this.floydSteinbergRadioButton = new System.Windows.Forms.RadioButton();
-      this.noneRadioButton = new System.Windows.Forms.RadioButton();
+      this.noDitherRadioButton = new System.Windows.Forms.RadioButton();
       this.colorConversionGroupBox = new Cyotek.Windows.Forms.GroupBox();
       this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
       this.colorPanel = new System.Windows.Forms.Panel();
@@ -49,8 +49,9 @@
       this.monochromePanel = new System.Windows.Forms.Panel();
       this.label1 = new System.Windows.Forms.Label();
       this.thresholdNumericUpDown = new System.Windows.Forms.NumericUpDown();
-      this.monochromeRadioButton = new System.Windows.Forms.RadioButton();
       this.colorRadioButton = new System.Windows.Forms.RadioButton();
+      this.monochromeRadioButton = new System.Windows.Forms.RadioButton();
+      this.noTransformRadioButton = new System.Windows.Forms.RadioButton();
       this.menuStrip = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,8 +71,13 @@
       this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.horizontalToolStripButton = new System.Windows.Forms.ToolStripButton();
+      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+      this.actualSizeToolStripButton = new System.Windows.Forms.ToolStripButton();
       this.statusStrip = new System.Windows.Forms.StatusStrip();
       this.statusToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+      this.originalColorsToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+      this.transformedColorsToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+      this.zoomToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
       this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
       ((System.ComponentModel.ISupportInitialize)(this.rootSplitContainer)).BeginInit();
       this.rootSplitContainer.Panel1.SuspendLayout();
@@ -96,46 +102,46 @@
       this.toolStrip.SuspendLayout();
       this.statusStrip.SuspendLayout();
       this.SuspendLayout();
-      //
+      // 
       // rootSplitContainer
-      //
+      // 
       this.rootSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
       this.rootSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
       this.rootSplitContainer.Location = new System.Drawing.Point(0, 49);
       this.rootSplitContainer.Name = "rootSplitContainer";
-      //
+      // 
       // rootSplitContainer.Panel1
-      //
+      // 
       this.rootSplitContainer.Panel1.Controls.Add(this.previewSplitContainer);
-      //
+      // 
       // rootSplitContainer.Panel2
-      //
+      // 
       this.rootSplitContainer.Panel2.Controls.Add(this.ditheringModeGroupBox);
       this.rootSplitContainer.Panel2.Controls.Add(this.colorConversionGroupBox);
       this.rootSplitContainer.Size = new System.Drawing.Size(821, 439);
       this.rootSplitContainer.SplitterDistance = 511;
       this.rootSplitContainer.TabIndex = 3;
-      //
+      // 
       // previewSplitContainer
-      //
+      // 
       this.previewSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
       this.previewSplitContainer.Location = new System.Drawing.Point(0, 0);
       this.previewSplitContainer.Name = "previewSplitContainer";
       this.previewSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      //
+      // 
       // previewSplitContainer.Panel1
-      //
+      // 
       this.previewSplitContainer.Panel1.Controls.Add(this.originalImageBox);
-      //
+      // 
       // previewSplitContainer.Panel2
-      //
+      // 
       this.previewSplitContainer.Panel2.Controls.Add(this.transformedImageBox);
       this.previewSplitContainer.Size = new System.Drawing.Size(511, 439);
       this.previewSplitContainer.SplitterDistance = 216;
       this.previewSplitContainer.TabIndex = 0;
-      //
+      // 
       // originalImageBox
-      //
+      // 
       this.originalImageBox.Dock = System.Windows.Forms.DockStyle.Fill;
       this.originalImageBox.ForeColor = System.Drawing.SystemColors.HighlightText;
       this.originalImageBox.Location = new System.Drawing.Point(0, 0);
@@ -149,9 +155,9 @@
       this.originalImageBox.TextPadding = new System.Windows.Forms.Padding(5, 3, 5, 3);
       this.originalImageBox.Zoomed += new System.EventHandler<Cyotek.Windows.Forms.ImageBoxZoomEventArgs>(this.originalImageBox_Zoomed);
       this.originalImageBox.Scroll += new System.Windows.Forms.ScrollEventHandler(this.originalImageBox_Scroll);
-      //
+      // 
       // transformedImageBox
-      //
+      // 
       this.transformedImageBox.Dock = System.Windows.Forms.DockStyle.Fill;
       this.transformedImageBox.ForeColor = System.Drawing.SystemColors.HighlightText;
       this.transformedImageBox.Location = new System.Drawing.Point(0, 0);
@@ -165,24 +171,24 @@
       this.transformedImageBox.TextPadding = new System.Windows.Forms.Padding(5, 3, 5, 3);
       this.transformedImageBox.Zoomed += new System.EventHandler<Cyotek.Windows.Forms.ImageBoxZoomEventArgs>(this.originalImageBox_Zoomed);
       this.transformedImageBox.Scroll += new System.Windows.Forms.ScrollEventHandler(this.originalImageBox_Scroll);
-      //
+      // 
       // ditheringModeGroupBox
-      //
+      // 
       this.ditheringModeGroupBox.Controls.Add(this.otherGroupBox);
       this.ditheringModeGroupBox.Controls.Add(this.orderedGroupBox);
       this.ditheringModeGroupBox.Controls.Add(this.errorDiffusionGroupBox);
-      this.ditheringModeGroupBox.Controls.Add(this.noneRadioButton);
+      this.ditheringModeGroupBox.Controls.Add(this.noDitherRadioButton);
       this.ditheringModeGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-      this.ditheringModeGroupBox.Location = new System.Drawing.Point(0, 117);
+      this.ditheringModeGroupBox.Location = new System.Drawing.Point(0, 135);
       this.ditheringModeGroupBox.Name = "ditheringModeGroupBox";
       this.ditheringModeGroupBox.Size = new System.Drawing.Size(306, 304);
       this.ditheringModeGroupBox.TabIndex = 1;
       this.ditheringModeGroupBox.TabStop = false;
       this.ditheringModeGroupBox.Text = "Dithering Algorithm";
-      //
+      // 
       // otherGroupBox
-      //
-      this.otherGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+      // 
+      this.otherGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.otherGroupBox.Controls.Add(this.randomRadioButton);
       this.otherGroupBox.Controls.Add(this.refreshButton);
@@ -192,9 +198,9 @@
       this.otherGroupBox.TabIndex = 3;
       this.otherGroupBox.TabStop = false;
       this.otherGroupBox.Text = "Other";
-      //
+      // 
       // randomRadioButton
-      //
+      // 
       this.randomRadioButton.AutoSize = true;
       this.randomRadioButton.Location = new System.Drawing.Point(6, 22);
       this.randomRadioButton.Name = "randomRadioButton";
@@ -203,9 +209,9 @@
       this.randomRadioButton.Text = "Rando&m Noise";
       this.randomRadioButton.UseVisualStyleBackColor = true;
       this.randomRadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
       // refreshButton
-      //
+      // 
       this.refreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.refreshButton.Location = new System.Drawing.Point(210, 19);
       this.refreshButton.Name = "refreshButton";
@@ -214,10 +220,10 @@
       this.refreshButton.Text = "&Refresh";
       this.refreshButton.UseVisualStyleBackColor = true;
       this.refreshButton.Click += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
       // orderedGroupBox
-      //
-      this.orderedGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+      // 
+      this.orderedGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.orderedGroupBox.Controls.Add(this.tableLayoutPanel2);
       this.orderedGroupBox.Location = new System.Drawing.Point(6, 166);
@@ -226,10 +232,10 @@
       this.orderedGroupBox.TabIndex = 2;
       this.orderedGroupBox.TabStop = false;
       this.orderedGroupBox.Text = "Ordered";
-      //
+      // 
       // tableLayoutPanel2
-      //
-      this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+      // 
+      this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.tableLayoutPanel2.AutoSize = true;
       this.tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -247,9 +253,9 @@
       this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
       this.tableLayoutPanel2.Size = new System.Drawing.Size(278, 46);
       this.tableLayoutPanel2.TabIndex = 0;
-      //
+      // 
       // bayer8RadioButton
-      //
+      // 
       this.bayer8RadioButton.AutoSize = true;
       this.bayer8RadioButton.Location = new System.Drawing.Point(142, 26);
       this.bayer8RadioButton.Name = "bayer8RadioButton";
@@ -258,9 +264,9 @@
       this.bayer8RadioButton.Text = "Bayer&8";
       this.bayer8RadioButton.UseVisualStyleBackColor = true;
       this.bayer8RadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
       // bayer4RadioButton
-      //
+      // 
       this.bayer4RadioButton.AutoSize = true;
       this.bayer4RadioButton.Location = new System.Drawing.Point(142, 3);
       this.bayer4RadioButton.Name = "bayer4RadioButton";
@@ -269,9 +275,9 @@
       this.bayer4RadioButton.Text = "Bayer&4";
       this.bayer4RadioButton.UseVisualStyleBackColor = true;
       this.bayer4RadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
       // bayer2RadioButton
-      //
+      // 
       this.bayer2RadioButton.AutoSize = true;
       this.bayer2RadioButton.Location = new System.Drawing.Point(3, 3);
       this.bayer2RadioButton.Name = "bayer2RadioButton";
@@ -280,9 +286,9 @@
       this.bayer2RadioButton.Text = "Bayer&2";
       this.bayer2RadioButton.UseVisualStyleBackColor = true;
       this.bayer2RadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
       // bayer3RadioButton
-      //
+      // 
       this.bayer3RadioButton.AutoSize = true;
       this.bayer3RadioButton.Location = new System.Drawing.Point(3, 26);
       this.bayer3RadioButton.Name = "bayer3RadioButton";
@@ -291,10 +297,10 @@
       this.bayer3RadioButton.Text = "Bayer&3";
       this.bayer3RadioButton.UseVisualStyleBackColor = true;
       this.bayer3RadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
       // errorDiffusionGroupBox
-      //
-      this.errorDiffusionGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+      // 
+      this.errorDiffusionGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.errorDiffusionGroupBox.Controls.Add(this.tableLayoutPanel1);
       this.errorDiffusionGroupBox.Location = new System.Drawing.Point(6, 42);
@@ -303,10 +309,10 @@
       this.errorDiffusionGroupBox.TabIndex = 1;
       this.errorDiffusionGroupBox.TabStop = false;
       this.errorDiffusionGroupBox.Text = "Error Diffusion";
-      //
+      // 
       // tableLayoutPanel1
-      //
-      this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+      // 
+      this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.tableLayoutPanel1.AutoSize = true;
       this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -330,9 +336,9 @@
       this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
       this.tableLayoutPanel1.Size = new System.Drawing.Size(278, 92);
       this.tableLayoutPanel1.TabIndex = 0;
-      //
+      // 
       // sierraLiteRadioButton
-      //
+      // 
       this.sierraLiteRadioButton.AutoSize = true;
       this.sierraLiteRadioButton.Location = new System.Drawing.Point(142, 49);
       this.sierraLiteRadioButton.Name = "sierraLiteRadioButton";
@@ -341,9 +347,9 @@
       this.sierraLiteRadioButton.Text = "Sierra &Lite";
       this.sierraLiteRadioButton.UseVisualStyleBackColor = true;
       this.sierraLiteRadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
       // atkinsonRadioButton
-      //
+      // 
       this.atkinsonRadioButton.AutoSize = true;
       this.atkinsonRadioButton.Location = new System.Drawing.Point(142, 72);
       this.atkinsonRadioButton.Name = "atkinsonRadioButton";
@@ -352,9 +358,9 @@
       this.atkinsonRadioButton.Text = "&Atkinson";
       this.atkinsonRadioButton.UseVisualStyleBackColor = true;
       this.atkinsonRadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
       // sierra2RadioButton
-      //
+      // 
       this.sierra2RadioButton.AutoSize = true;
       this.sierra2RadioButton.Location = new System.Drawing.Point(142, 26);
       this.sierra2RadioButton.Name = "sierra2RadioButton";
@@ -363,9 +369,9 @@
       this.sierra2RadioButton.Text = "T&wo Row Sierra";
       this.sierra2RadioButton.UseVisualStyleBackColor = true;
       this.sierra2RadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
       // sierra3RadioButton
-      //
+      // 
       this.sierra3RadioButton.AutoSize = true;
       this.sierra3RadioButton.Location = new System.Drawing.Point(142, 3);
       this.sierra3RadioButton.Name = "sierra3RadioButton";
@@ -374,9 +380,9 @@
       this.sierra3RadioButton.Text = "S&ierra";
       this.sierra3RadioButton.UseVisualStyleBackColor = true;
       this.sierra3RadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
       // stuckiRadioButton
-      //
+      // 
       this.stuckiRadioButton.AutoSize = true;
       this.stuckiRadioButton.Location = new System.Drawing.Point(3, 72);
       this.stuckiRadioButton.Name = "stuckiRadioButton";
@@ -385,9 +391,9 @@
       this.stuckiRadioButton.Text = "St&ucki";
       this.stuckiRadioButton.UseVisualStyleBackColor = true;
       this.stuckiRadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
       // burkesRadioButton
-      //
+      // 
       this.burkesRadioButton.AutoSize = true;
       this.burkesRadioButton.Location = new System.Drawing.Point(3, 26);
       this.burkesRadioButton.Name = "burkesRadioButton";
@@ -396,9 +402,9 @@
       this.burkesRadioButton.Text = "&Burkes";
       this.burkesRadioButton.UseVisualStyleBackColor = true;
       this.burkesRadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
       // jarvisJudiceNinkeDitheringradioButton
-      //
+      // 
       this.jarvisJudiceNinkeDitheringradioButton.AutoSize = true;
       this.jarvisJudiceNinkeDitheringradioButton.Location = new System.Drawing.Point(3, 49);
       this.jarvisJudiceNinkeDitheringradioButton.Name = "jarvisJudiceNinkeDitheringradioButton";
@@ -407,9 +413,9 @@
       this.jarvisJudiceNinkeDitheringradioButton.Text = "&Jarvis, Judice && Ninke";
       this.jarvisJudiceNinkeDitheringradioButton.UseVisualStyleBackColor = true;
       this.jarvisJudiceNinkeDitheringradioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
       // floydSteinbergRadioButton
-      //
+      // 
       this.floydSteinbergRadioButton.AutoSize = true;
       this.floydSteinbergRadioButton.Location = new System.Drawing.Point(3, 3);
       this.floydSteinbergRadioButton.Name = "floydSteinbergRadioButton";
@@ -418,62 +424,65 @@
       this.floydSteinbergRadioButton.Text = "Floyd-&Steinberg";
       this.floydSteinbergRadioButton.UseVisualStyleBackColor = true;
       this.floydSteinbergRadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
-      // noneRadioButton
-      //
-      this.noneRadioButton.AutoSize = true;
-      this.noneRadioButton.Location = new System.Drawing.Point(6, 19);
-      this.noneRadioButton.Name = "noneRadioButton";
-      this.noneRadioButton.Size = new System.Drawing.Size(124, 17);
-      this.noneRadioButton.TabIndex = 0;
-      this.noneRadioButton.Text = "&None (Nearest Color)";
-      this.noneRadioButton.UseVisualStyleBackColor = true;
-      this.noneRadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
-      //
+      // 
+      // noDitherRadioButton
+      // 
+      this.noDitherRadioButton.AutoSize = true;
+      this.noDitherRadioButton.Location = new System.Drawing.Point(6, 19);
+      this.noDitherRadioButton.Name = "noDitherRadioButton";
+      this.noDitherRadioButton.Size = new System.Drawing.Size(124, 17);
+      this.noDitherRadioButton.TabIndex = 0;
+      this.noDitherRadioButton.Text = "&None (Nearest Color)";
+      this.noDitherRadioButton.UseVisualStyleBackColor = true;
+      this.noDitherRadioButton.CheckedChanged += new System.EventHandler(this.DitherCheckBoxCheckedChangedHandler);
+      // 
       // colorConversionGroupBox
-      //
+      // 
       this.colorConversionGroupBox.Controls.Add(this.tableLayoutPanel4);
       this.colorConversionGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
       this.colorConversionGroupBox.Location = new System.Drawing.Point(0, 0);
       this.colorConversionGroupBox.Name = "colorConversionGroupBox";
-      this.colorConversionGroupBox.Size = new System.Drawing.Size(306, 117);
+      this.colorConversionGroupBox.Size = new System.Drawing.Size(306, 135);
       this.colorConversionGroupBox.TabIndex = 0;
       this.colorConversionGroupBox.TabStop = false;
       this.colorConversionGroupBox.Text = "Color Conversion";
-      //
+      // 
       // tableLayoutPanel4
-      //
-      this.tableLayoutPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+      // 
+      this.tableLayoutPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.tableLayoutPanel4.AutoSize = true;
       this.tableLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.tableLayoutPanel4.ColumnCount = 2;
       this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
       this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this.tableLayoutPanel4.Controls.Add(this.colorPanel, 1, 1);
-      this.tableLayoutPanel4.Controls.Add(this.monochromePanel, 1, 0);
-      this.tableLayoutPanel4.Controls.Add(this.monochromeRadioButton, 0, 0);
-      this.tableLayoutPanel4.Controls.Add(this.colorRadioButton, 0, 1);
+      this.tableLayoutPanel4.Controls.Add(this.colorPanel, 1, 2);
+      this.tableLayoutPanel4.Controls.Add(this.monochromePanel, 1, 1);
+      this.tableLayoutPanel4.Controls.Add(this.colorRadioButton, 0, 2);
+      this.tableLayoutPanel4.Controls.Add(this.monochromeRadioButton, 0, 1);
+      this.tableLayoutPanel4.Controls.Add(this.noTransformRadioButton, 0, 0);
       this.tableLayoutPanel4.Location = new System.Drawing.Point(6, 19);
       this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-      this.tableLayoutPanel4.RowCount = 2;
+      this.tableLayoutPanel4.RowCount = 3;
       this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
       this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.tableLayoutPanel4.Size = new System.Drawing.Size(294, 90);
+      this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+      this.tableLayoutPanel4.Size = new System.Drawing.Size(294, 113);
       this.tableLayoutPanel4.TabIndex = 0;
-      //
+      // 
       // colorPanel
-      //
+      // 
       this.colorPanel.Controls.Add(this.paletteSizeComboBox);
       this.colorPanel.Controls.Add(this.label2);
       this.colorPanel.Enabled = false;
-      this.colorPanel.Location = new System.Drawing.Point(150, 48);
+      this.colorPanel.Location = new System.Drawing.Point(150, 71);
       this.colorPanel.Name = "colorPanel";
       this.colorPanel.Size = new System.Drawing.Size(133, 39);
-      this.colorPanel.TabIndex = 5;
-      //
+      this.colorPanel.TabIndex = 4;
+      // 
       // paletteSizeComboBox
-      //
+      // 
       this.paletteSizeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.paletteSizeComboBox.FormattingEnabled = true;
       this.paletteSizeComboBox.Items.AddRange(new object[] {
@@ -485,36 +494,36 @@
       this.paletteSizeComboBox.Size = new System.Drawing.Size(70, 21);
       this.paletteSizeComboBox.TabIndex = 1;
       this.paletteSizeComboBox.SelectedIndexChanged += new System.EventHandler(this.thresholdNumericUpDown_ValueChanged);
-      //
+      // 
       // label2
-      //
+      // 
       this.label2.AutoSize = true;
       this.label2.Location = new System.Drawing.Point(-3, 1);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(66, 13);
       this.label2.TabIndex = 0;
       this.label2.Text = "Palette Si&ze:";
-      //
+      // 
       // monochromePanel
-      //
+      // 
       this.monochromePanel.Controls.Add(this.label1);
       this.monochromePanel.Controls.Add(this.thresholdNumericUpDown);
-      this.monochromePanel.Location = new System.Drawing.Point(150, 3);
+      this.monochromePanel.Location = new System.Drawing.Point(150, 26);
       this.monochromePanel.Name = "monochromePanel";
       this.monochromePanel.Size = new System.Drawing.Size(138, 39);
-      this.monochromePanel.TabIndex = 4;
-      //
+      this.monochromePanel.TabIndex = 2;
+      // 
       // label1
-      //
+      // 
       this.label1.AutoSize = true;
       this.label1.Location = new System.Drawing.Point(-3, 1);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(132, 13);
       this.label1.TabIndex = 0;
       this.label1.Text = "Blac&k and white threshold:";
-      //
+      // 
       // thresholdNumericUpDown
-      //
+      // 
       this.thresholdNumericUpDown.Location = new System.Drawing.Point(3, 16);
       this.thresholdNumericUpDown.Maximum = new decimal(new int[] {
             255,
@@ -530,33 +539,44 @@
             0,
             0});
       this.thresholdNumericUpDown.ValueChanged += new System.EventHandler(this.thresholdNumericUpDown_ValueChanged);
-      //
+      // 
+      // colorRadioButton
+      // 
+      this.colorRadioButton.AutoSize = true;
+      this.colorRadioButton.Location = new System.Drawing.Point(3, 71);
+      this.colorRadioButton.Name = "colorRadioButton";
+      this.colorRadioButton.Size = new System.Drawing.Size(49, 17);
+      this.colorRadioButton.TabIndex = 3;
+      this.colorRadioButton.Text = "&Color";
+      this.colorRadioButton.UseVisualStyleBackColor = true;
+      this.colorRadioButton.CheckedChanged += new System.EventHandler(this.monochromeRadioButton_CheckedChanged);
+      // 
       // monochromeRadioButton
-      //
+      // 
       this.monochromeRadioButton.AutoSize = true;
       this.monochromeRadioButton.Checked = true;
-      this.monochromeRadioButton.Location = new System.Drawing.Point(3, 3);
+      this.monochromeRadioButton.Location = new System.Drawing.Point(3, 26);
       this.monochromeRadioButton.Name = "monochromeRadioButton";
       this.monochromeRadioButton.Size = new System.Drawing.Size(87, 17);
-      this.monochromeRadioButton.TabIndex = 0;
+      this.monochromeRadioButton.TabIndex = 1;
       this.monochromeRadioButton.TabStop = true;
       this.monochromeRadioButton.Text = "&Monochrome";
       this.monochromeRadioButton.UseVisualStyleBackColor = true;
       this.monochromeRadioButton.CheckedChanged += new System.EventHandler(this.monochromeRadioButton_CheckedChanged);
-      //
-      // colorRadioButton
-      //
-      this.colorRadioButton.AutoSize = true;
-      this.colorRadioButton.Location = new System.Drawing.Point(3, 48);
-      this.colorRadioButton.Name = "colorRadioButton";
-      this.colorRadioButton.Size = new System.Drawing.Size(49, 17);
-      this.colorRadioButton.TabIndex = 1;
-      this.colorRadioButton.Text = "&Color";
-      this.colorRadioButton.UseVisualStyleBackColor = true;
-      this.colorRadioButton.CheckedChanged += new System.EventHandler(this.monochromeRadioButton_CheckedChanged);
-      //
+      // 
+      // noTransformRadioButton
+      // 
+      this.noTransformRadioButton.AutoSize = true;
+      this.noTransformRadioButton.Location = new System.Drawing.Point(3, 3);
+      this.noTransformRadioButton.Name = "noTransformRadioButton";
+      this.noTransformRadioButton.Size = new System.Drawing.Size(125, 17);
+      this.noTransformRadioButton.TabIndex = 0;
+      this.noTransformRadioButton.Text = "None (Ori&ginal Pixels)";
+      this.noTransformRadioButton.UseVisualStyleBackColor = true;
+      this.noTransformRadioButton.CheckedChanged += new System.EventHandler(this.monochromeRadioButton_CheckedChanged);
+      // 
       // menuStrip
-      //
+      // 
       this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
@@ -566,9 +586,9 @@
       this.menuStrip.Name = "menuStrip";
       this.menuStrip.Size = new System.Drawing.Size(821, 24);
       this.menuStrip.TabIndex = 0;
-      //
+      // 
       // fileToolStripMenuItem
-      //
+      // 
       this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.saveAsToolStripMenuItem,
@@ -577,63 +597,63 @@
       this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
       this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
       this.fileToolStripMenuItem.Text = "&File";
-      //
+      // 
       // openToolStripMenuItem
-      //
+      // 
       this.openToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.Open;
       this.openToolStripMenuItem.Name = "openToolStripMenuItem";
       this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
       this.openToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
       this.openToolStripMenuItem.Text = "&Open...";
       this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
-      //
+      // 
       // saveAsToolStripMenuItem
-      //
+      // 
       this.saveAsToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.Save;
       this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
       this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
       this.saveAsToolStripMenuItem.Text = "Save &As...";
       this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
-      //
+      // 
       // toolStripMenuItem1
-      //
+      // 
       this.toolStripMenuItem1.Name = "toolStripMenuItem1";
       this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 6);
-      //
+      // 
       // exitToolStripMenuItem
-      //
+      // 
       this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
       this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
       this.exitToolStripMenuItem.Text = "E&xit";
       this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-      //
+      // 
       // editToolStripMenuItem
-      //
+      // 
       this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pasteToolStripMenuItem});
       this.editToolStripMenuItem.Name = "editToolStripMenuItem";
       this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
       this.editToolStripMenuItem.Text = "&Edit";
-      //
+      // 
       // pasteToolStripMenuItem
-      //
+      // 
       this.pasteToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.Paste;
       this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
       this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
       this.pasteToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
       this.pasteToolStripMenuItem.Text = "&Paste";
       this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
-      //
+      // 
       // viewToolStripMenuItem
-      //
+      // 
       this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.horizontalSplitToolStripMenuItem});
       this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
       this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
       this.viewToolStripMenuItem.Text = "&View";
-      //
+      // 
       // horizontalSplitToolStripMenuItem
-      //
+      // 
       this.horizontalSplitToolStripMenuItem.Checked = true;
       this.horizontalSplitToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
       this.horizontalSplitToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.HorizontalSplit;
@@ -641,38 +661,40 @@
       this.horizontalSplitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
       this.horizontalSplitToolStripMenuItem.Text = "&Horizontal Split";
       this.horizontalSplitToolStripMenuItem.Click += new System.EventHandler(this.horizontalSplitToolStripMenuItem_Click);
-      //
+      // 
       // helpToolStripMenuItem
-      //
+      // 
       this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
       this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
       this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
       this.helpToolStripMenuItem.Text = "&Help";
-      //
+      // 
       // aboutToolStripMenuItem
-      //
+      // 
       this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
       this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
       this.aboutToolStripMenuItem.Text = "&About...";
       this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-      //
+      // 
       // toolStrip
-      //
+      // 
       this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripButton,
             this.saveAsToolStripButton,
             this.toolStripSeparator1,
             this.pasteToolStripButton,
             this.toolStripSeparator2,
-            this.horizontalToolStripButton});
+            this.horizontalToolStripButton,
+            this.toolStripSeparator3,
+            this.actualSizeToolStripButton});
       this.toolStrip.Location = new System.Drawing.Point(0, 24);
       this.toolStrip.Name = "toolStrip";
       this.toolStrip.Size = new System.Drawing.Size(821, 25);
       this.toolStrip.TabIndex = 1;
-      //
+      // 
       // openToolStripButton
-      //
+      // 
       this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.openToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.Open;
       this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -680,9 +702,9 @@
       this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
       this.openToolStripButton.Text = "Open";
       this.openToolStripButton.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
-      //
+      // 
       // saveAsToolStripButton
-      //
+      // 
       this.saveAsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.saveAsToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.Save;
       this.saveAsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -690,14 +712,14 @@
       this.saveAsToolStripButton.Size = new System.Drawing.Size(23, 22);
       this.saveAsToolStripButton.Text = "Save As";
       this.saveAsToolStripButton.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
-      //
+      // 
       // toolStripSeparator1
-      //
+      // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
       this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-      //
+      // 
       // pasteToolStripButton
-      //
+      // 
       this.pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.pasteToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.Paste;
       this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -705,14 +727,14 @@
       this.pasteToolStripButton.Size = new System.Drawing.Size(23, 22);
       this.pasteToolStripButton.Text = "Paste";
       this.pasteToolStripButton.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
-      //
+      // 
       // toolStripSeparator2
-      //
+      // 
       this.toolStripSeparator2.Name = "toolStripSeparator2";
       this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-      //
+      // 
       // horizontalToolStripButton
-      //
+      // 
       this.horizontalToolStripButton.Checked = true;
       this.horizontalToolStripButton.CheckState = System.Windows.Forms.CheckState.Checked;
       this.horizontalToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -722,30 +744,72 @@
       this.horizontalToolStripButton.Size = new System.Drawing.Size(23, 22);
       this.horizontalToolStripButton.Text = "Horizontal";
       this.horizontalToolStripButton.Click += new System.EventHandler(this.horizontalSplitToolStripMenuItem_Click);
-      //
+      // 
+      // toolStripSeparator3
+      // 
+      this.toolStripSeparator3.Name = "toolStripSeparator3";
+      this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+      // 
+      // actualSizeToolStripButton
+      // 
+      this.actualSizeToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.actualSizeToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.ActualSize;
+      this.actualSizeToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.actualSizeToolStripButton.Name = "actualSizeToolStripButton";
+      this.actualSizeToolStripButton.Size = new System.Drawing.Size(23, 22);
+      this.actualSizeToolStripButton.Text = "Actual Size";
+      this.actualSizeToolStripButton.Click += new System.EventHandler(this.actualSizeToolStripButton_Click);
+      // 
       // statusStrip
-      //
+      // 
       this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusToolStripStatusLabel});
+            this.statusToolStripStatusLabel,
+            this.originalColorsToolStripStatusLabel,
+            this.transformedColorsToolStripStatusLabel,
+            this.zoomToolStripStatusLabel});
       this.statusStrip.Location = new System.Drawing.Point(0, 488);
       this.statusStrip.Name = "statusStrip";
+      this.statusStrip.ShowItemToolTips = true;
       this.statusStrip.Size = new System.Drawing.Size(821, 22);
       this.statusStrip.TabIndex = 2;
-      //
+      // 
       // statusToolStripStatusLabel
-      //
+      // 
       this.statusToolStripStatusLabel.Name = "statusToolStripStatusLabel";
-      this.statusToolStripStatusLabel.Size = new System.Drawing.Size(806, 17);
+      this.statusToolStripStatusLabel.Size = new System.Drawing.Size(535, 17);
       this.statusToolStripStatusLabel.Spring = true;
       this.statusToolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      //
+      // 
+      // originalColorsToolStripStatusLabel
+      // 
+      this.originalColorsToolStripStatusLabel.AutoSize = false;
+      this.originalColorsToolStripStatusLabel.Name = "originalColorsToolStripStatusLabel";
+      this.originalColorsToolStripStatusLabel.Size = new System.Drawing.Size(80, 17);
+      this.originalColorsToolStripStatusLabel.Text = "0";
+      this.originalColorsToolStripStatusLabel.ToolTipText = "Original Color Count";
+      // 
+      // transformedColorsToolStripStatusLabel
+      // 
+      this.transformedColorsToolStripStatusLabel.AutoSize = false;
+      this.transformedColorsToolStripStatusLabel.Name = "transformedColorsToolStripStatusLabel";
+      this.transformedColorsToolStripStatusLabel.Size = new System.Drawing.Size(80, 17);
+      this.transformedColorsToolStripStatusLabel.Text = "0";
+      this.transformedColorsToolStripStatusLabel.ToolTipText = "Transformed Color Count";
+      // 
+      // zoomToolStripStatusLabel
+      // 
+      this.zoomToolStripStatusLabel.AutoSize = false;
+      this.zoomToolStripStatusLabel.Name = "zoomToolStripStatusLabel";
+      this.zoomToolStripStatusLabel.Size = new System.Drawing.Size(80, 17);
+      this.zoomToolStripStatusLabel.Text = "100%";
+      // 
       // backgroundWorker
-      //
+      // 
       this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
       this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
-      //
+      // 
       // MainForm
-      //
+      // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(821, 510);
@@ -803,7 +867,7 @@
     private System.Windows.Forms.SplitContainer previewSplitContainer;
     private Cyotek.Windows.Forms.ImageBox originalImageBox;
     private Cyotek.Windows.Forms.ImageBox transformedImageBox;
-    private System.Windows.Forms.RadioButton noneRadioButton;
+    private System.Windows.Forms.RadioButton noDitherRadioButton;
     private System.Windows.Forms.MenuStrip menuStrip;
     private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -855,6 +919,12 @@
     private System.Windows.Forms.StatusStrip statusStrip;
     private System.Windows.Forms.ToolStripStatusLabel statusToolStripStatusLabel;
     private System.ComponentModel.BackgroundWorker backgroundWorker;
+    private System.Windows.Forms.RadioButton noTransformRadioButton;
+    private System.Windows.Forms.ToolStripStatusLabel zoomToolStripStatusLabel;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+    private System.Windows.Forms.ToolStripButton actualSizeToolStripButton;
+    private System.Windows.Forms.ToolStripStatusLabel originalColorsToolStripStatusLabel;
+    private System.Windows.Forms.ToolStripStatusLabel transformedColorsToolStripStatusLabel;
   }
 }
 

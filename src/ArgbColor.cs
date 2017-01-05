@@ -1,10 +1,9 @@
-﻿using System.Drawing;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 /* Dithering an image using the Floyd–Steinberg algorithm in C#
  * http://www.cyotek.com/blog/dithering-an-image-using-the-floyd-steinberg-algorithm-in-csharp
  *
- * Copyright © 2015 Cyotek Ltd.
+ * Copyright © 2015-2017 Cyotek Ltd.
  *
  * Licensed under the MIT License. See LICENSE.txt for the full text.
  */
@@ -18,6 +17,9 @@ namespace Cyotek.Drawing
   [StructLayout(LayoutKind.Explicit)]
   public struct ArgbColor
   {
+    [FieldOffset(0)]
+    private readonly int _value;
+
     /// <summary>
     /// Gets the blue component value of this <see cref="ArgbColor"/> structure.
     /// </summary>
@@ -45,6 +47,7 @@ namespace Cyotek.Drawing
     public ArgbColor(int red, int green, int blue)
       : this(255, red, green, blue)
     { }
+
     public ArgbColor(int alpha, int red, int green, int blue)
       : this()
     {
@@ -58,9 +61,15 @@ namespace Cyotek.Drawing
     {
       return new ArgbColor(a, r, g, b);
     }
+
     internal static ArgbColor FromArgb(byte r, byte g, byte b)
     {
       return new ArgbColor(r, g, b);
+    }
+
+    public int ToArgb()
+    {
+      return _value;
     }
   }
 }

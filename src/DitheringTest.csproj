@@ -129,6 +129,7 @@
     <Content Include="..\resources\icon.ico">
       <Link>icon.ico</Link>
     </Content>
+    <Content Include="Resources\image-resize-actual.png" />
     <Content Include="Resources\Paste.png" />
     <Content Include="Resources\Sample.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
