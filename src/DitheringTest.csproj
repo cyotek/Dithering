@@ -92,6 +92,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\ArticleDiagrams.cs" />
+    <Compile Include="Transforms\IPixelTransform.cs" />
+    <Compile Include="Transforms\MonochromePixelTransform.cs" />
+    <Compile Include="Transforms\SimpleIndexedPalettePixelTransform16.cs" />
+    <Compile Include="Transforms\SimpleIndexedPalettePixelTransform.cs" />
+    <Compile Include="Transforms\SimpleIndexedPalettePixelTransform256.cs" />
+    <Compile Include="Transforms\SimpleIndexedPalettePixelTransform8.cs" />
     <EmbeddedResource Include="AboutDialog.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </EmbeddedResource>

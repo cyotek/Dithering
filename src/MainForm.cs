@@ -1,10 +1,14 @@
-﻿using System;
+﻿#define USEWORKER
+//#undef USEWORKER
+using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Media;
 using System.Windows.Forms;
 using Cyotek.DitheringTest.Helpers;
+using Cyotek.DitheringTest.Transforms;
 using Cyotek.Drawing;
 using Cyotek.Drawing.Imaging.ColorReduction;
 using Cyotek.Windows.Forms;
@@ -12,7 +16,7 @@ using Cyotek.Windows.Forms;
 /* Dithering an image using the Floyd–Steinberg algorithm in C#
  * http://www.cyotek.com/blog/dithering-an-image-using-the-floyd-steinberg-algorithm-in-csharp
  *
- * Copyright © 2015 Cyotek Ltd.
+ * Copyright © 2015-2017 Cyotek Ltd.
  *
  * Licensed under the MIT License. See LICENSE.txt for the full text.
  */
@@ -24,6 +28,8 @@ namespace Cyotek.DitheringTest
     #region Fields
 
     private Bitmap _image;
+
+    private RadioButton _previousSelection;
 
     private Bitmap _transformed;
 
@@ -67,6 +73,9 @@ namespace Cyotek.DitheringTest
     {
       base.OnShown(e);
 
+      paletteSizeComboBox.SelectedIndex = 0;
+      noneRadioButton.Checked = true;
+
       this.OpenImage(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"resources\sample.png"));
 
       //this.OpenImage(ArticleDiagrams.CreateBurkesDiagram());
@@ -79,6 +88,34 @@ namespace Cyotek.DitheringTest
       {
         dialog.ShowDialog(this);
       }
+    }
+
+    private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+    {
+      Tuple<Bitmap, IPixelTransform, IErrorDiffusion> data;
+
+      data = (Tuple<Bitmap, IPixelTransform, IErrorDiffusion>)e.Argument;
+
+      e.Result = this.GetTransformedImage(data.Item1, data.Item2, data.Item3);
+    }
+
+    private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    {
+      this.CleanUpTransformed();
+
+      if (e.Error != null)
+      {
+        MessageBox.Show("Failed to transform image. " + e.Error.GetBaseException().Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+      else
+      {
+        _transformed = e.Result as Bitmap;
+        transformedImageBox.Image = _transformed;
+      }
+
+      statusToolStripStatusLabel.Text = string.Empty;
+      Cursor.Current = Cursors.Default;
+      this.UseWaitCursor = false;
     }
 
     private void CleanUpOriginal()
@@ -106,58 +143,6 @@ namespace Cyotek.DitheringTest
       }
     }
 
-    private void CreateTransformedImage()
-    {
-      Bitmap image;
-      ArgbColor[] originalData;
-      Size size;
-      IErrorDiffusion dither;
-      bool performTransform;
-
-      this.CleanUpTransformed();
-
-      image = _image;
-      size = image.Size;
-      performTransform = transformCheckBox.Checked;
-
-      originalData = image.GetPixelsFrom32BitArgbImage();
-
-      dither = this.GetDitheringInstance();
-
-      for (int row = 0; row < size.Height; row++)
-      {
-        for (int col = 0; col < size.Width; col++)
-        {
-          int index;
-          ArgbColor current;
-          ArgbColor transformed;
-
-          index = row * size.Width + col;
-
-          current = originalData[index];
-
-          // transform the pixel - normally this would be some form of color
-          // reduction. For this sample it's simple threshold based
-          // monochrome conversion
-          if (performTransform)
-          {
-            transformed = this.TransformPixel(current);
-            originalData[index] = transformed;
-          }
-          else
-          {
-            transformed = current;
-          }
-
-          // apply a dither algorithm to this pixel
-          dither?.Diffuse(originalData, current, transformed, col, row, size.Width, size.Height);
-        }
-      }
-
-      _transformed = originalData.ToBitmap(size);
-      transformedImageBox.Image = _transformed;
-    }
-
     private void DefineImageBoxes(object sender, out ImageBox source, out ImageBox dest)
     {
       source = (ImageBox)sender;
@@ -173,19 +158,19 @@ namespace Cyotek.DitheringTest
       // you will have multiple checked items at once.
 
       control = sender as RadioButton;
-      if (control != null && control.Checked )
+      if (control != null && control.Checked)
       {
-        if (!object.ReferenceEquals(control, _previousSelection) && _previousSelection != null)
+        if (!ReferenceEquals(control, _previousSelection) && _previousSelection != null)
         {
           _previousSelection.Checked = false;
         }
         _previousSelection = control;
       }
 
-      this.CreateTransformedImage();
-    }
+      refreshButton.Enabled = randomRadioButton.Checked;
 
-    private RadioButton _previousSelection;
+      this.RequestImageTransform();
+    }
 
     private void exitToolStripMenuItem_Click(object sender, EventArgs e)
     {
@@ -256,6 +241,79 @@ namespace Cyotek.DitheringTest
       return result;
     }
 
+    private IPixelTransform GetPixelTransform()
+    {
+      IPixelTransform result;
+
+      result = null;
+
+      if (monochromeRadioButton.Checked)
+      {
+        result = new MonochromePixelTransform((byte)thresholdNumericUpDown.Value);
+      }
+      else
+      {
+        switch (paletteSizeComboBox.SelectedIndex)
+        {
+          case 0:
+            result = new SimpleIndexedPalettePixelTransform8();
+            break;
+          case 1:
+            result = new SimpleIndexedPalettePixelTransform16();
+            break;
+          case 2:
+            result = new SimpleIndexedPalettePixelTransform256();
+            break;
+        }
+      }
+
+      return result;
+    }
+
+    private Bitmap GetTransformedImage(Bitmap image, IPixelTransform transform, IErrorDiffusion dither)
+    {
+      Bitmap result;
+      ArgbColor[] pixelData;
+      Size size;
+
+      size = image.Size;
+      pixelData = image.GetPixelsFrom32BitArgbImage();
+
+      for (int row = 0; row < size.Height; row++)
+      {
+        for (int col = 0; col < size.Width; col++)
+        {
+          int index;
+          ArgbColor current;
+          ArgbColor transformed;
+
+          index = row * size.Width + col;
+
+          current = pixelData[index];
+
+          // transform the pixel - normally this would be some form of color
+          // reduction. For this sample it's simple threshold based
+          // monochrome conversion
+          if (transform != null)
+          {
+            transformed = transform.Transform(pixelData, current, col, row, size.Width, size.Height);
+            pixelData[index] = transformed;
+          }
+          else
+          {
+            transformed = current;
+          }
+
+          // apply a dither algorithm to this pixel
+          dither?.Diffuse(pixelData, current, transformed, col, row, size.Width, size.Height);
+        }
+      }
+
+      result = pixelData.ToBitmap(size);
+
+      return result;
+    }
+
     private void horizontalSplitToolStripMenuItem_Click(object sender, EventArgs e)
     {
       bool horizontal;
@@ -276,6 +334,26 @@ namespace Cyotek.DitheringTest
       }
     }
 
+    private void monochromeRadioButton_CheckedChanged(object sender, EventArgs e)
+    {
+      if (((RadioButton)sender).Checked)
+      {
+        if (ReferenceEquals(sender, monochromeRadioButton))
+        {
+          colorRadioButton.Checked = false;
+        }
+        else
+        {
+          monochromeRadioButton.Checked = false;
+        }
+      }
+
+      monochromePanel.Enabled = monochromeRadioButton.Checked;
+      colorPanel.Enabled = colorRadioButton.Checked;
+
+      this.RequestImageTransform();
+    }
+
     private void OpenImage(Bitmap bitmap)
     {
       this.CleanUpOriginal();
@@ -293,7 +371,7 @@ namespace Cyotek.DitheringTest
       originalImageBox.Image = _image;
       originalImageBox.ActualSize();
 
-      this.CreateTransformedImage();
+      this.RequestImageTransform();
     }
 
     private void OpenImage(string fileName)
@@ -373,6 +451,30 @@ namespace Cyotek.DitheringTest
       }
     }
 
+    private void RequestImageTransform()
+    {
+      if (_image != null && !backgroundWorker.IsBusy)
+      {
+        IPixelTransform transform;
+        IErrorDiffusion ditherer;
+        Bitmap image;
+
+        statusToolStripStatusLabel.Text = "Running image transform...";
+        Cursor.Current = Cursors.WaitCursor;
+        this.UseWaitCursor = true;
+
+        transform = this.GetPixelTransform();
+        ditherer = this.GetDitheringInstance();
+        image = _image.Copy();
+
+#if USEWORKER
+        backgroundWorker.RunWorkerAsync(Tuple.Create(image, transform, ditherer));
+#else
+        backgroundWorker_RunWorkerCompleted(backgroundWorker, new RunWorkerCompletedEventArgs(this.GetTransformedImage(image, transform, ditherer), null, false));
+#endif
+      }
+    }
+
     private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
     {
       using (FileDialog dialog = new SaveFileDialog
@@ -398,33 +500,9 @@ namespace Cyotek.DitheringTest
 
     private void thresholdNumericUpDown_ValueChanged(object sender, EventArgs e)
     {
-      this.CreateTransformedImage();
-    }
-
-    private ArgbColor TransformPixel(ArgbColor pixel)
-    {
-      byte gray;
-
-      gray = (byte)(0.299 * pixel.R + 0.587 * pixel.G + 0.114 * pixel.B);
-
-      /*
-       * I'm leaving the alpha channel untouched instead of making it fully opaque
-       * otherwise the transparent areas become fully black, and I was getting annoyed
-       * by this when testing images with large swathes of transparency!
-       */
-
-      return gray < (byte)thresholdNumericUpDown.Value ? new ArgbColor(pixel.A, 0, 0, 0) : new ArgbColor(pixel.A, 255, 255, 255);
+      this.RequestImageTransform();
     }
 
     #endregion
-
-    private void transformCheckBox_CheckedChanged(object sender, EventArgs e)
-    {
-      convertPanel.Enabled = transformCheckBox.Checked;
-
-      this.CreateTransformedImage();
-    }
-
-    private ArgbColor[] _map = { new ArgbColor(0, 0, 0), new ArgbColor(255, 0, 0), new ArgbColor(0, 255, 0), new ArgbColor(0, 0, 255), new ArgbColor(255, 255, 0), new ArgbColor(255, 0, 255), new ArgbColor(0, 255, 255), new ArgbColor(255, 255, 255) };
   }
 }

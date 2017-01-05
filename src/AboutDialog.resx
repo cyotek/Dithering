@@ -118,7 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ossLinkLabel.Text" xml:space="preserve">
-    <value>The ImageBox control is available as open source on GitHub, with articles describing its use and how it was developed on cyotek.com.
+    <value>Most of the dithering algorithms and the nearest colour algorithm featured in this program were taken from DHALF.TXT.
+
+The ImageBox control is available as open source on GitHub, with articles describing its use and how it was developed on cyotek.com.
 
 The GroupBox control can be obtained from another article on cyotek.com.
 

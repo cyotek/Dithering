@@ -5,7 +5,7 @@ using System.Windows.Forms;
 /* Dithering an image using the Floyd–Steinberg algorithm in C#
  * http://www.cyotek.com/blog/dithering-an-image-using-the-floyd-steinberg-algorithm-in-csharp
  *
- * Copyright © 2015 Cyotek Ltd.
+ * Copyright © 2015-2017 Cyotek Ltd.
  *
  * Licensed under the MIT License. See LICENSE.txt for the full text.
  */
@@ -36,6 +36,8 @@ namespace Cyotek.DitheringTest
       this.SetLink(ossLinkLabel, "GitHub", "https://github.com/cyotek/Cyotek.Windows.Forms.ImageBox");
       this.SetLink(ossLinkLabel, "cyotek.com", "http://www.cyotek.com/blog/tag/imagebox");
       this.SetLink(ossLinkLabel, "another article", "http://www.cyotek.com/blog/creating-a-groupbox-containing-an-image-and-a-custom-display-rectangle");
+      this.SetLink(ossLinkLabel, "README.md", "https://github.com/cyotek/Dithering/blob/master/README.md");
+      this.SetLink(ossLinkLabel, "DHALF.TXT", "https://github.com/cyotek/Dithering/blob/master/resources/DHALF.TXT");
 
       base.OnLoad(e);
     }
