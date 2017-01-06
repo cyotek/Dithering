@@ -23,6 +23,25 @@ namespace Cyotek.DitheringTest.Helpers
 
     #region Static Methods
 
+    public static void CopyImage(Bitmap image)
+    {
+      if (image != null)
+      {
+        try
+        {
+          Clipboard.SetImage(image);
+        }
+        catch (Exception ex)
+        {
+          MessageBox.Show(string.Format("Failed to copy image. {0}", ex.GetBaseException().Message), "Copy Image", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+      }
+      else
+      {
+        MessageBox.Show("Nothing to copy.", "Copy Image", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      }
+    }
+
     public static Bitmap GetImage()
     {
       Bitmap result;

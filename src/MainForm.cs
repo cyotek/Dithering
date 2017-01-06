@@ -162,6 +162,62 @@ namespace Cyotek.DitheringTest
       }
     }
 
+    private void copyMergedToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      if (_image != null && _transformed != null)
+      {
+        int iw;
+        int ih;
+        int x2;
+        int y2;
+        int fw;
+        int fh;
+
+        fw = _image.Width;
+        fh = _image.Height;
+
+        if (horizontalSplitToolStripMenuItem.Checked)
+        {
+          iw = fw;
+          ih = fh * 2;
+          x2 = 0;
+          y2 = fh;
+        }
+        else
+        {
+          iw = fw * 2;
+          ih = fh;
+          x2 = fw;
+          y2 = 0;
+        }
+
+        using (Bitmap image = new Bitmap(iw, ih, PixelFormat.Format32bppArgb))
+        {
+          using (Graphics g = Graphics.FromImage(image))
+          {
+            g.DrawImage(_image, new Rectangle(0, 0, fw, fh), new Rectangle(0, 0, fw, fh), GraphicsUnit.Pixel);
+            g.DrawImage(_transformed, new Rectangle(x2, y2, fw, fh), new Rectangle(0, 0, fw, fh), GraphicsUnit.Pixel);
+          }
+
+          ClipboardHelpers.CopyImage(image);
+        }
+      }
+      else
+      {
+        MessageBox.Show("Both the source and transformed images must exist to make a merged copy.", "Copy Image", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      }
+    }
+
+    private void copySourceToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      ClipboardHelpers.CopyImage(_image);
+    }
+
+    private void copyTransformedToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      ClipboardHelpers.CopyImage(_transformed);
+    }
+
     private void DefineImageBoxes(object sender, out ImageBox source, out ImageBox dest)
     {
       source = (ImageBox)sender;

@@ -129,11 +129,13 @@
     <Content Include="..\resources\icon.ico">
       <Link>icon.ico</Link>
     </Content>
-    <Content Include="Resources\image-resize-actual.png" />
-    <Content Include="Resources\Paste.png" />
-    <Content Include="Resources\Sample.png">
+    <None Include="Resources\Copy and Append.png" />
+    <None Include="Resources\Copy.png" />
+    <None Include="Resources\image-resize-actual.png" />
+    <None Include="Resources\Paste.png" />
+    <None Include="Resources\Sample.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <None Include="Resources\ui-splitter-horizontal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

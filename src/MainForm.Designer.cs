@@ -54,31 +54,39 @@
       this.noTransformRadioButton = new System.Windows.Forms.RadioButton();
       this.menuStrip = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
       this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.horizontalSplitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStrip = new System.Windows.Forms.ToolStrip();
-      this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
-      this.saveAsToolStripButton = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-      this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-      this.horizontalToolStripButton = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-      this.actualSizeToolStripButton = new System.Windows.Forms.ToolStripButton();
       this.statusStrip = new System.Windows.Forms.StatusStrip();
       this.statusToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
       this.originalColorsToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
       this.transformedColorsToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
       this.zoomToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
       this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+      this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.copySourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.copyTransformedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.copyMergedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
+      this.saveAsToolStripButton = new System.Windows.Forms.ToolStripButton();
+      this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
+      this.horizontalToolStripButton = new System.Windows.Forms.ToolStripButton();
+      this.actualSizeToolStripButton = new System.Windows.Forms.ToolStripButton();
+      this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.horizontalSplitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+      this.sourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.transformedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.copyMergedToolStripButton = new System.Windows.Forms.ToolStripButton();
       ((System.ComponentModel.ISupportInitialize)(this.rootSplitContainer)).BeginInit();
       this.rootSplitContainer.Panel1.SuspendLayout();
       this.rootSplitContainer.Panel2.SuspendLayout();
@@ -598,23 +606,6 @@
       this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
       this.fileToolStripMenuItem.Text = "&File";
       // 
-      // openToolStripMenuItem
-      // 
-      this.openToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.Open;
-      this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-      this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-      this.openToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-      this.openToolStripMenuItem.Text = "&Open...";
-      this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
-      // 
-      // saveAsToolStripMenuItem
-      // 
-      this.saveAsToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.Save;
-      this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-      this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-      this.saveAsToolStripMenuItem.Text = "Save &As...";
-      this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
-      // 
       // toolStripMenuItem1
       // 
       this.toolStripMenuItem1.Name = "toolStripMenuItem1";
@@ -630,19 +621,12 @@
       // editToolStripMenuItem
       // 
       this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem,
+            this.copyMergedToolStripMenuItem,
             this.pasteToolStripMenuItem});
       this.editToolStripMenuItem.Name = "editToolStripMenuItem";
       this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
       this.editToolStripMenuItem.Text = "&Edit";
-      // 
-      // pasteToolStripMenuItem
-      // 
-      this.pasteToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.Paste;
-      this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-      this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-      this.pasteToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-      this.pasteToolStripMenuItem.Text = "&Paste";
-      this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
       // 
       // viewToolStripMenuItem
       // 
@@ -651,16 +635,6 @@
       this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
       this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
       this.viewToolStripMenuItem.Text = "&View";
-      // 
-      // horizontalSplitToolStripMenuItem
-      // 
-      this.horizontalSplitToolStripMenuItem.Checked = true;
-      this.horizontalSplitToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.horizontalSplitToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.HorizontalSplit;
-      this.horizontalSplitToolStripMenuItem.Name = "horizontalSplitToolStripMenuItem";
-      this.horizontalSplitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-      this.horizontalSplitToolStripMenuItem.Text = "&Horizontal Split";
-      this.horizontalSplitToolStripMenuItem.Click += new System.EventHandler(this.horizontalSplitToolStripMenuItem_Click);
       // 
       // helpToolStripMenuItem
       // 
@@ -683,6 +657,8 @@
             this.openToolStripButton,
             this.saveAsToolStripButton,
             this.toolStripSeparator1,
+            this.toolStripDropDownButton1,
+            this.copyMergedToolStripButton,
             this.pasteToolStripButton,
             this.toolStripSeparator2,
             this.horizontalToolStripButton,
@@ -693,72 +669,20 @@
       this.toolStrip.Size = new System.Drawing.Size(821, 25);
       this.toolStrip.TabIndex = 1;
       // 
-      // openToolStripButton
-      // 
-      this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.openToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.Open;
-      this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.openToolStripButton.Name = "openToolStripButton";
-      this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
-      this.openToolStripButton.Text = "Open";
-      this.openToolStripButton.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
-      // 
-      // saveAsToolStripButton
-      // 
-      this.saveAsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.saveAsToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.Save;
-      this.saveAsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.saveAsToolStripButton.Name = "saveAsToolStripButton";
-      this.saveAsToolStripButton.Size = new System.Drawing.Size(23, 22);
-      this.saveAsToolStripButton.Text = "Save As";
-      this.saveAsToolStripButton.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
-      // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
       this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-      // 
-      // pasteToolStripButton
-      // 
-      this.pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.pasteToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.Paste;
-      this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.pasteToolStripButton.Name = "pasteToolStripButton";
-      this.pasteToolStripButton.Size = new System.Drawing.Size(23, 22);
-      this.pasteToolStripButton.Text = "Paste";
-      this.pasteToolStripButton.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
       // 
       // toolStripSeparator2
       // 
       this.toolStripSeparator2.Name = "toolStripSeparator2";
       this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
       // 
-      // horizontalToolStripButton
-      // 
-      this.horizontalToolStripButton.Checked = true;
-      this.horizontalToolStripButton.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.horizontalToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.horizontalToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.HorizontalSplit;
-      this.horizontalToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.horizontalToolStripButton.Name = "horizontalToolStripButton";
-      this.horizontalToolStripButton.Size = new System.Drawing.Size(23, 22);
-      this.horizontalToolStripButton.Text = "Horizontal";
-      this.horizontalToolStripButton.Click += new System.EventHandler(this.horizontalSplitToolStripMenuItem_Click);
-      // 
       // toolStripSeparator3
       // 
       this.toolStripSeparator3.Name = "toolStripSeparator3";
       this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-      // 
-      // actualSizeToolStripButton
-      // 
-      this.actualSizeToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.actualSizeToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.ActualSize;
-      this.actualSizeToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.actualSizeToolStripButton.Name = "actualSizeToolStripButton";
-      this.actualSizeToolStripButton.Size = new System.Drawing.Size(23, 22);
-      this.actualSizeToolStripButton.Text = "Actual Size";
-      this.actualSizeToolStripButton.Click += new System.EventHandler(this.actualSizeToolStripButton_Click);
       // 
       // statusStrip
       // 
@@ -776,7 +700,7 @@
       // statusToolStripStatusLabel
       // 
       this.statusToolStripStatusLabel.Name = "statusToolStripStatusLabel";
-      this.statusToolStripStatusLabel.Size = new System.Drawing.Size(535, 17);
+      this.statusToolStripStatusLabel.Size = new System.Drawing.Size(566, 17);
       this.statusToolStripStatusLabel.Spring = true;
       this.statusToolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       // 
@@ -807,6 +731,162 @@
       // 
       this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
       this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+      // 
+      // copyToolStripMenuItem
+      // 
+      this.copyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copySourceToolStripMenuItem,
+            this.copyTransformedToolStripMenuItem});
+      this.copyToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.Copy;
+      this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+      this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.copyToolStripMenuItem.Text = "&Copy";
+      // 
+      // copySourceToolStripMenuItem
+      // 
+      this.copySourceToolStripMenuItem.Name = "copySourceToolStripMenuItem";
+      this.copySourceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.copySourceToolStripMenuItem.Text = "&Source";
+      this.copySourceToolStripMenuItem.Click += new System.EventHandler(this.copySourceToolStripMenuItem_Click);
+      // 
+      // copyTransformedToolStripMenuItem
+      // 
+      this.copyTransformedToolStripMenuItem.Name = "copyTransformedToolStripMenuItem";
+      this.copyTransformedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.copyTransformedToolStripMenuItem.Text = "&Transformed";
+      this.copyTransformedToolStripMenuItem.Click += new System.EventHandler(this.copyTransformedToolStripMenuItem_Click);
+      // 
+      // copyMergedToolStripMenuItem
+      // 
+      this.copyMergedToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.CopyMerged;
+      this.copyMergedToolStripMenuItem.Name = "copyMergedToolStripMenuItem";
+      this.copyMergedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.copyMergedToolStripMenuItem.Text = "Copy &Merged";
+      this.copyMergedToolStripMenuItem.Click += new System.EventHandler(this.copyMergedToolStripMenuItem_Click);
+      // 
+      // openToolStripButton
+      // 
+      this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.openToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.Open;
+      this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.openToolStripButton.Name = "openToolStripButton";
+      this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
+      this.openToolStripButton.Text = "Open";
+      this.openToolStripButton.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+      // 
+      // saveAsToolStripButton
+      // 
+      this.saveAsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.saveAsToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.Save;
+      this.saveAsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.saveAsToolStripButton.Name = "saveAsToolStripButton";
+      this.saveAsToolStripButton.Size = new System.Drawing.Size(23, 22);
+      this.saveAsToolStripButton.Text = "Save As";
+      this.saveAsToolStripButton.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+      // 
+      // pasteToolStripButton
+      // 
+      this.pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.pasteToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.Paste;
+      this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.pasteToolStripButton.Name = "pasteToolStripButton";
+      this.pasteToolStripButton.Size = new System.Drawing.Size(23, 22);
+      this.pasteToolStripButton.Text = "Paste";
+      this.pasteToolStripButton.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
+      // 
+      // horizontalToolStripButton
+      // 
+      this.horizontalToolStripButton.Checked = true;
+      this.horizontalToolStripButton.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.horizontalToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.horizontalToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.HorizontalSplit;
+      this.horizontalToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.horizontalToolStripButton.Name = "horizontalToolStripButton";
+      this.horizontalToolStripButton.Size = new System.Drawing.Size(23, 22);
+      this.horizontalToolStripButton.Text = "Horizontal";
+      this.horizontalToolStripButton.Click += new System.EventHandler(this.horizontalSplitToolStripMenuItem_Click);
+      // 
+      // actualSizeToolStripButton
+      // 
+      this.actualSizeToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.actualSizeToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.ActualSize;
+      this.actualSizeToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.actualSizeToolStripButton.Name = "actualSizeToolStripButton";
+      this.actualSizeToolStripButton.Size = new System.Drawing.Size(23, 22);
+      this.actualSizeToolStripButton.Text = "Actual Size";
+      this.actualSizeToolStripButton.Click += new System.EventHandler(this.actualSizeToolStripButton_Click);
+      // 
+      // openToolStripMenuItem
+      // 
+      this.openToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.Open;
+      this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+      this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+      this.openToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+      this.openToolStripMenuItem.Text = "&Open...";
+      this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+      // 
+      // saveAsToolStripMenuItem
+      // 
+      this.saveAsToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.Save;
+      this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+      this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+      this.saveAsToolStripMenuItem.Text = "Save &As...";
+      this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+      // 
+      // pasteToolStripMenuItem
+      // 
+      this.pasteToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.Paste;
+      this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+      this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+      this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.pasteToolStripMenuItem.Text = "&Paste";
+      this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
+      // 
+      // horizontalSplitToolStripMenuItem
+      // 
+      this.horizontalSplitToolStripMenuItem.Checked = true;
+      this.horizontalSplitToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.horizontalSplitToolStripMenuItem.Image = global::Cyotek.DitheringTest.Properties.Resources.HorizontalSplit;
+      this.horizontalSplitToolStripMenuItem.Name = "horizontalSplitToolStripMenuItem";
+      this.horizontalSplitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+      this.horizontalSplitToolStripMenuItem.Text = "&Horizontal Split";
+      this.horizontalSplitToolStripMenuItem.Click += new System.EventHandler(this.horizontalSplitToolStripMenuItem_Click);
+      // 
+      // toolStripDropDownButton1
+      // 
+      this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sourceToolStripMenuItem,
+            this.transformedToolStripMenuItem});
+      this.toolStripDropDownButton1.Image = global::Cyotek.DitheringTest.Properties.Resources.Copy;
+      this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+      this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
+      this.toolStripDropDownButton1.Text = "Copy";
+      // 
+      // sourceToolStripMenuItem
+      // 
+      this.sourceToolStripMenuItem.Name = "sourceToolStripMenuItem";
+      this.sourceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.sourceToolStripMenuItem.Text = "&Source";
+      this.sourceToolStripMenuItem.Click += new System.EventHandler(this.copySourceToolStripMenuItem_Click);
+      // 
+      // transformedToolStripMenuItem
+      // 
+      this.transformedToolStripMenuItem.Name = "transformedToolStripMenuItem";
+      this.transformedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.transformedToolStripMenuItem.Text = "&Transformed";
+      this.transformedToolStripMenuItem.Click += new System.EventHandler(this.copyTransformedToolStripMenuItem_Click);
+      // 
+      // copyMergedToolStripButton
+      // 
+      this.copyMergedToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.copyMergedToolStripButton.Image = global::Cyotek.DitheringTest.Properties.Resources.CopyMerged;
+      this.copyMergedToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.copyMergedToolStripButton.Name = "copyMergedToolStripButton";
+      this.copyMergedToolStripButton.Size = new System.Drawing.Size(23, 22);
+      this.copyMergedToolStripButton.Text = "Copy Merged";
+      this.copyMergedToolStripButton.Click += new System.EventHandler(this.copyMergedToolStripMenuItem_Click);
       // 
       // MainForm
       // 
@@ -925,6 +1005,14 @@
     private System.Windows.Forms.ToolStripButton actualSizeToolStripButton;
     private System.Windows.Forms.ToolStripStatusLabel originalColorsToolStripStatusLabel;
     private System.Windows.Forms.ToolStripStatusLabel transformedColorsToolStripStatusLabel;
+    private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem copySourceToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem copyTransformedToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem copyMergedToolStripMenuItem;
+    private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+    private System.Windows.Forms.ToolStripMenuItem sourceToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem transformedToolStripMenuItem;
+    private System.Windows.Forms.ToolStripButton copyMergedToolStripButton;
   }
 }
 
