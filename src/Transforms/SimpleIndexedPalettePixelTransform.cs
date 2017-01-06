@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Cyotek.Drawing;
 
 namespace Cyotek.DitheringTest.Transforms
@@ -25,23 +24,6 @@ namespace Cyotek.DitheringTest.Transforms
     #endregion
 
     #region Methods
-
-    private int GetDistance(ArgbColor current, ArgbColor match)
-    {
-      int redDifference;
-      int greenDifference;
-      int blueDifference;
-
-      /*
-       * #define D(z) (line[z][x]-colormap[c][z])          // corrected color.
-       */
-
-      redDifference = current.R - match.R;
-      greenDifference = current.G - match.G;
-      blueDifference = current.B - match.B;
-
-      return redDifference * redDifference + greenDifference * greenDifference + blueDifference * blueDifference;
-    }
 
     private int FindNearestColor(ArgbColor current)
     {
@@ -80,6 +62,19 @@ namespace Cyotek.DitheringTest.Transforms
       }
 
       return index;
+    }
+
+    private int GetDistance(ArgbColor current, ArgbColor match)
+    {
+      int redDifference;
+      int greenDifference;
+      int blueDifference;
+
+      redDifference = current.R - match.R;
+      greenDifference = current.G - match.G;
+      blueDifference = current.B - match.B;
+
+      return redDifference * redDifference + greenDifference * greenDifference + blueDifference * blueDifference;
     }
 
     #endregion
