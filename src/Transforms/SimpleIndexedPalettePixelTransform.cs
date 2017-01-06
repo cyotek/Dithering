@@ -1,6 +1,12 @@
 ﻿using System.Collections.Generic;
 using Cyotek.Drawing;
 
+/* Finding nearest colors using Euclidean distance
+ * http://www.cyotek.com/blog/finding-nearest-colors-using-euclidean-distance
+ *
+ * Copyright © 2017 Cyotek Ltd.
+ */
+
 namespace Cyotek.DitheringTest.Transforms
 {
   internal abstract class SimpleIndexedPalettePixelTransform : IPixelTransform

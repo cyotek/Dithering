@@ -25,3 +25,13 @@ Referenced, but missing - if you find copies of these documents let [me know!](h
 * IDTVGA.TXT
 * DGIF.ZIP
 
+Screenshots
+-----------
+
+An example of Atkinson error diffusion, this time used in conjunction with a 256 fixed palette quantization.
+
+![dithering-atkinson-color](dithering-atkinson-color.png)
+
+An example of ordering dithering using an 8x8 Bayer matrix, demonstrating the classic hatching patterns associated with this style of dithering.
+
+![dithering-bayer8](dithering-bayer8.png)
