@@ -1,5 +1,5 @@
 ﻿/* Even more algorithms for dithering images using C#
- * http://www.cyotek.com/blog/even-more-algorithms-for-dithering-images-using-csharp
+ * https://www.cyotek.com/blog/even-more-algorithms-for-dithering-images-using-csharp
  *
  * Copyright © 2015 Cyotek Ltd.
  *

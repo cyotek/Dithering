@@ -1,5 +1,5 @@
 ﻿/* Dithering an image using the Burkes algorithm in C#
- * http://www.cyotek.com/blog/dithering-an-image-using-the-burkes-algorithm-in-csharp
+ * https://www.cyotek.com/blog/dithering-an-image-using-the-burkes-algorithm-in-csharp
  *
  * Copyright © 2015 Cyotek Ltd.
  *

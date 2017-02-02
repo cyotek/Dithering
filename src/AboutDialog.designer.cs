@@ -35,9 +35,9 @@
       this.closeButton = new System.Windows.Forms.Button();
       this.ossLinkLabel = new System.Windows.Forms.LinkLabel();
       this.SuspendLayout();
-      // 
+      //
       // nameLabel
-      // 
+      //
       this.nameLabel.AutoSize = true;
       this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.nameLabel.Location = new System.Drawing.Point(12, 9);
@@ -45,18 +45,18 @@
       this.nameLabel.Size = new System.Drawing.Size(61, 13);
       this.nameLabel.TabIndex = 0;
       this.nameLabel.Text = "AppName";
-      // 
+      //
       // copyrightLabel
-      // 
+      //
       this.copyrightLabel.AutoSize = true;
       this.copyrightLabel.Location = new System.Drawing.Point(12, 22);
       this.copyrightLabel.Name = "copyrightLabel";
       this.copyrightLabel.Size = new System.Drawing.Size(51, 13);
       this.copyrightLabel.TabIndex = 1;
       this.copyrightLabel.Text = "Copyright";
-      // 
+      //
       // webLinkLabel
-      // 
+      //
       this.webLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.webLinkLabel.AutoSize = true;
       this.webLinkLabel.Location = new System.Drawing.Point(12, 233);
@@ -64,11 +64,11 @@
       this.webLinkLabel.Size = new System.Drawing.Size(120, 13);
       this.webLinkLabel.TabIndex = 2;
       this.webLinkLabel.TabStop = true;
-      this.webLinkLabel.Text = "http://www.cyotek.com";
+      this.webLinkLabel.Text = "https://www.cyotek.com";
       this.webLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.webLinkLabel_LinkClicked);
-      // 
+      //
       // closeButton
-      // 
+      //
       this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.closeButton.Location = new System.Drawing.Point(420, 228);
@@ -78,11 +78,11 @@
       this.closeButton.Text = "Close";
       this.closeButton.UseVisualStyleBackColor = true;
       this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
-      // 
+      //
       // ossLinkLabel
-      // 
-      this.ossLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+      //
+      this.ossLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ossLinkLabel.Location = new System.Drawing.Point(12, 70);
       this.ossLinkLabel.Name = "ossLinkLabel";
@@ -91,9 +91,9 @@
       this.ossLinkLabel.TabStop = true;
       this.ossLinkLabel.Text = resources.GetString("ossLinkLabel.Text");
       this.ossLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ossLinkLabel_LinkClicked);
-      // 
+      //
       // AboutDialog
-      // 
+      //
       this.AcceptButton = this.closeButton;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
