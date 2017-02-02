@@ -120,9 +120,9 @@
   <data name="ossLinkLabel.Text" xml:space="preserve">
     <value>Most of the dithering algorithms and the nearest colour algorithm featured in this program were taken from DHALF.TXT.
 
-The ImageBox control is available as open source on GitHub, with articles describing its use and how it was developed on cyotek.com.
+Cyotek has published an article on calculating colour distance.
 
-The GroupBox control can be obtained from another article on cyotek.com.
+The ImageBox control is available as open source on GitHub, with articles describing its use and how it was developed on cyotek.com. The GroupBox control can be obtained from another article on cyotek.com.
 
 Please see README.md for additional resources.</value>
   </data>

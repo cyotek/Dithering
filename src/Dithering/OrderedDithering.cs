@@ -20,7 +20,7 @@ namespace Cyotek.Drawing.Imaging.ColorReduction
 
     protected OrderedDithering(byte[,] matrix)
     {
-      byte max;
+      int max;
       int scale;
 
       if (matrix == null)
@@ -36,19 +36,8 @@ namespace Cyotek.Drawing.Imaging.ColorReduction
       _matrixWidth = (byte)(matrix.GetUpperBound(1) + 1);
       _matrixHeight = (byte)(matrix.GetUpperBound(0) + 1);
 
-      max = 0;
-
-      for (int x = 0; x < _matrixWidth; x++)
-      {
-        for (int y = 0; y < _matrixHeight; y++)
-        {
-          max = Math.Max(max, matrix[x, y]);
-        }
-      }
-
-      // for 8x8 with a max of 63, you could do 255 >> 2
-
-      scale = (255 - Math.Max(_matrixWidth, _matrixHeight)) / max;
+      max = _matrixWidth * _matrixHeight;
+      scale = 255 / max;
 
       _matrix = new byte[_matrixHeight, _matrixWidth];
 

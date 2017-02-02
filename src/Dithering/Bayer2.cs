@@ -12,14 +12,8 @@ namespace Cyotek.Drawing.Imaging.ColorReduction
     public Bayer2()
       : base(new byte[,]
              {
-               {
-                 0,
-                 2
-               },
-               {
-                 3,
-                 1
-               }
+               { 0, 2 },
+               { 3, 1 }
              })
     { }
 

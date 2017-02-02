@@ -38,6 +38,7 @@ namespace Cyotek.DitheringTest
       this.SetLink(ossLinkLabel, "another article", "http://www.cyotek.com/blog/creating-a-groupbox-containing-an-image-and-a-custom-display-rectangle");
       this.SetLink(ossLinkLabel, "README.md", "https://github.com/cyotek/Dithering/blob/master/README.md");
       this.SetLink(ossLinkLabel, "DHALF.TXT", "https://github.com/cyotek/Dithering/blob/master/resources/DHALF.TXT");
+      this.SetLink(ossLinkLabel, "colour distance", "http://www.cyotek.com/blog/finding-nearest-colors-using-euclidean-distance");
 
       base.OnLoad(e);
     }

@@ -31,11 +31,15 @@ namespace Cyotek.DitheringTest
 
     private Bitmap _image;
 
+    private ArgbColor[] _originalImage;
+
     private RadioButton _previousDitherSelection;
 
     private RadioButton _previousTransformSelection;
 
     private Bitmap _transformed;
+
+    private ArgbColor[] _transformedImage;
 
     #endregion
 
@@ -119,13 +123,15 @@ namespace Cyotek.DitheringTest
       else
       {
         _transformed = e.Result as Bitmap;
+        _transformedImage = _transformed.GetPixelsFrom32BitArgbImage();
+
         transformedImageBox.Image = _transformed;
 
         ThreadPool.QueueUserWorkItem(state =>
                                      {
                                        int count;
 
-                                       count = this.GetColorCount(_transformed);
+                                       count = this.GetColorCount(_transformedImage);
 
                                        this.UpdateColorCount(transformedColorsToolStripStatusLabel, count);
                                      });
@@ -238,13 +244,13 @@ namespace Cyotek.DitheringTest
       this.Close();
     }
 
-    private int GetColorCount(Bitmap image)
+    private int GetColorCount(ArgbColor[] pixels)
     {
       HashSet<int> colors;
 
       colors = new HashSet<int>();
 
-      foreach (ArgbColor color in image.GetPixelsFrom32BitArgbImage())
+      foreach (ArgbColor color in pixels)
       {
         colors.Add(color.ToArgb());
       }
@@ -467,6 +473,7 @@ namespace Cyotek.DitheringTest
       //       want that to happen, and copying the image gets rid of this issue too
 
       _image = bitmap.Copy();
+      _originalImage = _image.GetPixelsFrom32BitArgbImage();
 
       originalImageBox.Image = _image;
       originalImageBox.ActualSize();
@@ -475,7 +482,7 @@ namespace Cyotek.DitheringTest
                                    {
                                      int count;
 
-                                     count = this.GetColorCount(_image);
+                                     count = this.GetColorCount(_originalImage);
 
                                      this.UpdateColorCount(originalColorsToolStripStatusLabel, count);
                                    });

@@ -12,21 +12,9 @@ namespace Cyotek.Drawing.Imaging.ColorReduction
     public Bayer3()
       : base(new byte[,]
              {
-               {
-                 0,
-                 7,
-                 3
-               },
-               {
-                 6,
-                 5,
-                 2
-               },
-               {
-                 4,
-                 1,
-                 8
-               }
+               { 0, 7, 3 },
+               { 6, 5, 2 },
+               { 4, 1, 8 }
              })
     { }
 
