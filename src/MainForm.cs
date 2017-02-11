@@ -105,11 +105,11 @@ namespace Cyotek.DitheringTest
 
     private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
     {
-      Tuple<Bitmap, IPixelTransform, IErrorDiffusion> data;
+      WorkerData data;
 
-      data = (Tuple<Bitmap, IPixelTransform, IErrorDiffusion>)e.Argument;
+      data = (WorkerData)e.Argument;
 
-      e.Result = this.GetTransformedImage(data.Item1, data.Item2, data.Item3);
+      e.Result = this.GetTransformedImage(data);
     }
 
     private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -322,6 +322,35 @@ namespace Cyotek.DitheringTest
       return result;
     }
 
+    private int GetMaximumColorCount()
+    {
+      int result;
+
+      result = 256;
+
+      if (monochromeRadioButton.Checked)
+      {
+        result = 2;
+      }
+      else if (colorRadioButton.Checked)
+      {
+        switch (paletteSizeComboBox.SelectedIndex)
+        {
+          case 0:
+            result = 8;
+            break;
+          case 1:
+            result = 16;
+            break;
+          case 2:
+            result = 256;
+            break;
+        }
+      }
+
+      return result;
+    }
+
     private IPixelTransform GetPixelTransform()
     {
       IPixelTransform result;
@@ -351,80 +380,34 @@ namespace Cyotek.DitheringTest
       return result;
     }
 
-    private Bitmap GetTransformedImage(Bitmap image, IPixelTransform transform, IErrorDiffusion dither)
+    private Bitmap GetTransformedImage(WorkerData workerData)
     {
+      Bitmap image;
       Bitmap result;
       ArgbColor[] pixelData;
       Size size;
-      bool inline;
+      IPixelTransform transform;
+      IErrorDiffusion dither;
 
+      transform = workerData.Transform;
+      dither = workerData.Dither;
+      image = workerData.Image;
       size = image.Size;
       pixelData = image.GetPixelsFrom32BitArgbImage();
 
-      if (dither != null)
+      if (dither != null && dither.Prescan)
       {
-        if (dither.Prescan)
-        {
-          inline = false;
-
-          for (int row = 0; row < size.Height; row++)
-          {
-            for (int col = 0; col < size.Width; col++)
-            {
-              int index;
-              ArgbColor current;
-
-              index = row * size.Width + col;
-
-              current = pixelData[index];
-
-              dither.Diffuse(pixelData, current, current, col, row, size.Width, size.Height);
-            }
-          }
-        }
-        else
-        {
-          inline = true;
-        }
-      }
-      else
-      {
-        inline = false;
+        // perform the dithering on the source data before
+        // it is transformed
+        this.ProcessPixels(pixelData, size, null, dither);
+        dither = null;
       }
 
-      for (int row = 0; row < size.Height; row++)
-      {
-        for (int col = 0; col < size.Width; col++)
-        {
-          int index;
-          ArgbColor current;
-          ArgbColor transformed;
+      // scan each pixel, apply a transform the pixel
+      // and then dither it
+      this.ProcessPixels(pixelData, size, transform, dither);
 
-          index = row * size.Width + col;
-
-          current = pixelData[index];
-
-          // transform the pixel - normally this would be some form of color
-          // reduction. For this sample it's simple threshold based
-          // monochrome conversion
-          if (transform != null)
-          {
-            transformed = transform.Transform(pixelData, current, col, row, size.Width, size.Height);
-            pixelData[index] = transformed;
-          }
-          else
-          {
-            transformed = current;
-          }
-
-          // apply a dither algorithm to this pixel
-          if (inline)
-          {
-            dither.Diffuse(pixelData, current, transformed, col, row, size.Width, size.Height);
-          }
-        }
-      }
-
+      // create the final bitmap
       result = pixelData.ToBitmap(size);
 
       return result;
@@ -569,10 +552,43 @@ namespace Cyotek.DitheringTest
       }
     }
 
+    private void ProcessPixels(ArgbColor[] pixelData, Size size, IPixelTransform pixelTransform, IErrorDiffusion dither)
+    {
+      for (int row = 0; row < size.Height; row++)
+      {
+        for (int col = 0; col < size.Width; col++)
+        {
+          int index;
+          ArgbColor current;
+          ArgbColor transformed;
+
+          index = row * size.Width + col;
+
+          current = pixelData[index];
+
+          // transform the pixel
+          if (pixelTransform != null)
+          {
+            transformed = pixelTransform.Transform(pixelData, current, col, row, size.Width, size.Height);
+            pixelData[index] = transformed;
+          }
+          else
+          {
+            transformed = current;
+          }
+
+          // apply a dither algorithm to this pixel
+          // assuming it wasn't done before
+          dither?.Diffuse(pixelData, current, transformed, col, row, size.Width, size.Height);
+        }
+      }
+    }
+
     private void RequestImageTransform()
     {
       if (_image != null && !backgroundWorker.IsBusy)
       {
+        WorkerData workerData;
         IPixelTransform transform;
         IErrorDiffusion ditherer;
         Bitmap image;
@@ -585,10 +601,18 @@ namespace Cyotek.DitheringTest
         ditherer = this.GetDitheringInstance();
         image = _image.Copy();
 
+        workerData = new WorkerData
+                     {
+                       Image = image,
+                       Transform = transform,
+                       Dither = ditherer,
+                       ColorCount = this.GetMaximumColorCount()
+                     };
+
 #if USEWORKER
-        backgroundWorker.RunWorkerAsync(Tuple.Create(image, transform, ditherer));
+        backgroundWorker.RunWorkerAsync(workerData);
 #else
-        backgroundWorker_RunWorkerCompleted(backgroundWorker, new RunWorkerCompletedEventArgs(this.GetTransformedImage(image, transform, ditherer), null, false));
+        backgroundWorker_RunWorkerCompleted(backgroundWorker, new RunWorkerCompletedEventArgs(this.GetTransformedImage(workerData), null, false));
 #endif
       }
     }

@@ -98,6 +98,7 @@
     <Compile Include="Transforms\SimpleIndexedPalettePixelTransform.cs" />
     <Compile Include="Transforms\SimpleIndexedPalettePixelTransform256.cs" />
     <Compile Include="Transforms\SimpleIndexedPalettePixelTransform8.cs" />
+    <Compile Include="WorkerData.cs" />
     <EmbeddedResource Include="AboutDialog.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </EmbeddedResource>
