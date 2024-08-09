@@ -1,4 +1,4 @@
-﻿/* Even more algorithms for dithering images using C#
+/* Even more algorithms for dithering images using C#
  * https://www.cyotek.com/blog/even-more-algorithms-for-dithering-images-using-csharp
  *
  * Copyright © 2015 Cyotek Ltd.
@@ -72,8 +72,8 @@ namespace Cyotek.Drawing.Imaging.ColorReduction
       int greenError;
 
       redError = original.R - transformed.R;
-      blueError = original.G - transformed.G;
-      greenError = original.B - transformed.B;
+      greenError = original.G - transformed.G;
+      blueError = original.B - transformed.B;
 
       for (int row = 0; row < _matrixHeight; row++)
       {
